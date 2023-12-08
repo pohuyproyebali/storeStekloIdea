@@ -1,0 +1,105 @@
+{% extends 'products/base.html' %}
+{% load static %}
+
+{% block content %}
+    <main class="main main-goods">
+            <div class="container">
+                <p class="title title-dark">Каталог</p>
+                <div class="catalog__block">
+                    <div class="sort-goods__block">
+                        <div class="sort-goods__list">
+                            <div class="sort-goods__item">
+                                <div class="sort-arrow"></div>
+                                <p class="sort__name">Размер</p>
+                            </div>
+                            <div class="sort-goods__content">
+                                <div class="content__item">
+                                    <input id="size__checkbox-1" name="size__checkbox" class="content__checkbox"
+                                        type="checkbox">
+                                    <label for="size__checkbox-1">
+                                        <p class="content__name">100x100</p>
+                                    </label>
+                                </div>
+                                <div class="content__item">
+                                    <input id="size__checkbox-2" name="size__checkbox" class="content__checkbox"
+                                        type="checkbox">
+                                    <label for="size__checkbox-2">
+                                        <p class="content__name">100x100</p>
+                                    </label>
+                                </div>
+                                <div class="content__item">
+                                    <input id="size__checkbox-3" name="size__checkbox" class="content__checkbox"
+                                        type="checkbox">
+                                    <label for="size__checkbox-3">
+                                        <p class="content__name">100x100</p>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="sort-goods__item">
+                                <div class="sort-arrow"></div>
+                                <p class="sort__name">Цена</p>
+                            </div>
+                            <div class="sort-goods__content">
+                                <div class="content__item">
+                                    <input class="price__input" placeholder="от 2 200 ₽" type="text" name="" id="">
+                                    <input class="price__input" placeholder="до 52 500 ₽" type="text" name="" id="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sort__btn apply-btn">Применить</div>
+                        <div class="sort__btn reset-btn">Сбросить</div>
+                    </div>
+                    <div class="goods">
+                        <div class="goods__sort">
+                            <p class="goods__sort-title">Сортировка:</p>
+                            <div class="goods__sort__choose">
+                                <p class="goods__sort-value">сначала недорогие</p>
+                                <div class="sort-arrow"></div>
+                            </div>
+                        </div>
+                        <div class="goods__sort__block">
+                            <div class="goods__sort__item">
+                                <input id="sort__radio-1" name="sort__radio-1" class="goods__sort__radio" type="radio">
+                                <label for="sort__radio-1">
+                                    <p class="goods__sort__name">Сначала недорогие</p>
+                                </label>
+                            </div>
+                            <div class="goods__sort__item">
+                                <input id="sort__radio-2" name="sort__radio-2" class="goods__sort__radio" type="radio">
+                                <label for="sort__radio-2">
+                                    <p class="goods__sort__name">Сначала дорогие</p>
+                                </label>
+                            </div>
+                            <div class="goods__sort__item">
+                                <input id="sort__radio-3" name="sort__radio-3" class="goods__sort__radio" type="radio">
+                                <label for="sort__radio-3">
+                                    <p class="goods__sort__name">Сначала популярные</p>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="goods__block">
+                            {% for mirror in mirror %}
+                            <div class="goods__item">
+                                <div class="goods-item__description">
+                                    <a href="{{ mirror.get_absolute_url }}">
+                                        <img src="{{ mirror.image.image.url }}" alt="" class="goods-item__img">
+                                        <p class="goods-item__name">{{ mirror.product.name }}</p>
+                                    </a>
+                                </div>
+                                <div class="goods-item__buy">
+                                    <a href="{{ mirror.get_absolute_url }}">
+                                        <p class="buy__cost">{{ mirror.cost }}</p>
+                                    </a>
+                                    <div class="cart"></div>
+                                </div>
+                                <div class="goods-line"></div>
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </main>
+{% endblock %}

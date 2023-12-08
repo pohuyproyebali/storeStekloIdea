@@ -1,0 +1,166 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="icon" href="">
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <title>STEKLO&IDEA</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class="header header-goods">
+            <div class="header__block header__block-goods">
+                <div class="container">
+                    <div class="header__nav-block">
+                        <a href="index.html">
+                            <p class="header__logo header__logo-goods">STEKLO&IDEA</p>
+                        </a>
+                        <div class="header__nav">
+                            <a class="nav__link" href="">
+                                <p class="nav__item nav__item-goods">Каталог</p>
+                            </a>
+                            <a class="nav__link" href="">
+                                <p class="nav__item nav__item-goods">Частые вопросы</p>
+                            </a>
+                            <a class="nav__link" href="">
+                                <p class="nav__item nav__item-goods">Связь с нами</p>
+                            </a>
+                            <div class="nav__link cart__link__block" href="">
+                                <div class="cart__link"></div>
+                            </div>
+                            <div class="header__burger header__burger-goods">
+                                <span></span>
+                            </div>
+                            <div class="header__burger__block">
+                                <div class="burger__nav">
+                                    <p class="burger__logo">STEKLO&IDEA</p>
+                                    <a class="burger__nav__link" href="goods.html">
+                                        <p class="burger__nav__item">Каталог</p>
+                                    </a>
+                                    <a class="burger__nav__link" href="">
+                                        <p class="burger__nav__item">Частые вопросы</p>
+                                    </a>
+                                    <a class="burger__nav__link" href="">
+                                        <p class="burger__nav__item">Связь с нами</p>
+                                    </a>
+                                    <a class="burger__nav__link" href="">
+                                        <p class="burger__nav__item">Популярные зеркала</p>
+                                    </a>
+                                    <a class="burger__nav__link" href="">
+                                        <p class="burger__nav__item">Проекты</p>
+                                    </a>
+                                    <a class="burger__nav__link" href="">
+                                        <p class="burger__nav__item">Процесс разработки</p>
+                                    </a>
+                                </div>
+                                <div class="burger__social">
+                                    <a class="social__link" href="">
+                                        <img src="static/img/vk.svg" alt="" class="social__item">
+                                    </a>
+                                    <a class="social__link" href="">
+                                        <img src="static/img/tg.svg" alt="" class="social__item">
+                                    </a>
+                                    <a class="social__link" href="">
+                                        <img src="static/img/insta.svg" alt="" class="social__item">
+                                    </a>
+                                    <a class="social__link" href="">
+                                        <img src="static/img/whatsapp.svg" alt="" class="social__item">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="cart__block">
+                <div class="cart__header">
+                    <p class="cart-header__title">Корзина</p>
+                    <div class="cart-header__close"></div>
+                </div>
+                <div class="cart__main">
+                    <div class="cart__items">
+                        <div class="cart__item">
+                            <div class="cart-item__description">
+                                <img class="cart-item__img" src="/img/popular-m-example.png" alt="">
+                                <div class="cart-item__title">Настенное зеркало с подсветкой</div>
+                                <div class="cart-item__close"></div>
+                            </div>
+                            <div class="cart-item__line"></div>
+                            <div class="cart-item__buy">
+                                <p class="cart-item__cost">5 555 ₽</p>
+                                <div class="cart-item__buy-btn">Заказать</div>
+                            </div>
+                        </div>
+                        <div class="cart__item">
+                            <div class="cart-item__description">
+                                <img class="cart-item__img" src="img/popular-m-example.png" alt="">
+                                <div class="cart-item__title">Настенное зеркало с подсветкой</div>
+                                <div class="cart-item__close"></div>
+                            </div>
+                            <div class="cart-item__line"></div>
+                            <div class="cart-item__buy">
+                                <p class="cart-item__cost">5 555 ₽</p>
+                                <div class="cart-item__buy-btn">Заказать</div>
+                            </div>
+                        </div>
+                        <div class="cart__item">
+                            <div class="cart-item__description">
+                                <img class="cart-item__img" src="img/popular-m-example.png" alt="">
+                                <div class="cart-item__title">Настенное зеркало с подсветкой</div>
+                                <div class="cart-item__close"></div>
+                            </div>
+                            <div class="cart-item__line"></div>
+                            <div class="cart-item__buy">
+                                <p class="cart-item__cost">5 555 ₽</p>
+                                <div class="cart-item__buy-btn">Заказать</div>
+                            </div>
+                        </div>
+                        <div class="cart__item">
+                            <div class="cart-item__description">
+                                <img class="cart-item__img" src="img/popular-m-example.png" alt="">
+                                <div class="cart-item__title">Настенное зеркало с подсветкой</div>
+                                <div class="cart-item__close"></div>
+                            </div>
+                            <div class="cart-item__line"></div>
+                            <div class="cart-item__buy">
+                                <p class="cart-item__cost">5 555 ₽</p>
+                                <div class="cart-item__buy-btn">Заказать</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cart__order">
+                        <p class="order__title">Оформить заказ</p>
+                        <div class="order__form">
+                            <input class="order-form__input" type="text" placeholder="Имя" name="" id="">
+                            <input class="order-form__input" type="text" placeholder="Номер телефона" name="" id="">
+                            <input class="order-form__input" type="text" placeholder="Город" name="" id="">
+                        </div>
+                        <div class="order__btn">Оставить заявку</div>
+                    </div>
+                </div>
+            </div> -->
+        </header>
+        {% block content %} {% endblock %}
+        <footer class="footer"></footer>
+    </div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="{% static '/js/slick.min.js' %}"></script>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="{% static '/js/index.js' %}"></script>
+
+</html>
