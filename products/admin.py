@@ -66,7 +66,7 @@ class ProductsAdmin(admin.ModelAdmin):
                 TypeBacklight.objects.filter(
                     id=BacklightToProduct.objects.filter(product=product.id)[0].typeBackLight.id)[
                     0]
-            costProduct += (math.ceil(P / (5 / backLight.quantityBloks)) * 800) + (
+            costProduct += (math.ceil(P / (5 / backLight.quantityBlocks)) * 800) + (
                     math.ceil(P / 5) * backLight.cost)  # Световая лента
             costProduct += 1100  # Рассходники
             if PlywoodBasisToProduct.objects.filter(product=product.id).exists():  # Работа

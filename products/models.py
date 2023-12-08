@@ -33,7 +33,7 @@ class Product(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('mirror', kwargs={'post_slug': self.slug})
+        return reverse('mirror', kwargs={'slug_id': self.slug})
 
 
 class PlywoodBasis(models.Model):
@@ -92,10 +92,10 @@ class FrameMirrorToProduct(models.Model):
 class TypeBacklight(models.Model):
     name = models.CharField(max_length=128, unique=True)
     cost = models.IntegerField()
-    quantityBloks = models.IntegerField()
+    quantityBlocks = models.IntegerField()
 
     def __str__(self):
-        return f'{self.name} | {self.quantityBloks}'
+        return f'{self.name} | {self.quantityBlocks}'
 
 
 # Наличие подсветки у зеркала

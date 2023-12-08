@@ -10,7 +10,7 @@ import math
 def goods(request):
     data = [{
         "product": i,
-        "cost": cost(product=i),
+        "cost": math.ceil(float(cost(product=i))),
         "image": ImageToProduct.objects.get(product=i.id, firstPhoto=True)
     } for i in Product.objects.all()]
 
@@ -19,8 +19,19 @@ def goods(request):
 
 def mirror_page(request, slug_id):
     mirror = get_object_or_404(Product, slug=slug_id)
+    context = {
+        "product": mirror,
+        "cost": math.ceil(float(cost(product=mirror))),
+        "images": ImageToProduct.objects.filter(product=mirror.id),
+        "size": SizeToProduct.objects.get(product=mirror.id, initially=True).size,
+        "back_light": (
+            TypeBacklight.objects.get(id=BacklightToProduct.objects.get(product=mirror.id).typeBackLight.id).name if
+            BacklightToProduct.objects.filter(product=mirror.id).exists() else "нет"
+        ).lower(),
+        "basis": "фанера" if PlywoodBasisToProduct.objects.filter(product=mirror.id).exists() else "алюминевый профиль"
+              }
 
-    return HttpResponse(mirror)
+    return render(request, 'products/product_page.html', {'mirror': context})
 
 
 def cost(product: Product, size: SizeToProduct = None):
@@ -55,9 +66,8 @@ def cost(product: Product, size: SizeToProduct = None):
             cost_product += 4000 if S < 2 else 5000 if S < 3 else 6000
     if BacklightToProduct.objects.filter(product=product.id).exists():
         back_light = \
-            TypeBacklight.objects.filter(id=BacklightToProduct.objects.filter(product=product.id)[0].typeBackLight.id)[
-                0]
-        cost_product += (math.ceil(P / (5 / back_light.quantityBloks)) * 800) + (
+            TypeBacklight.objects.filter(id=BacklightToProduct.objects.filter(product=product.id)[0].typeBackLight.id)[0]
+        cost_product += (math.ceil(P / (5 / back_light.quantityBlocks)) * 800) + (
                 math.ceil(P / 5) * back_light.cost)  # Световая лента
         cost_product += 1100  # Рассходники
         if PlywoodBasisToProduct.objects.filter(product=product.id).exists():  # Работа

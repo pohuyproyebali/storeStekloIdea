@@ -4,5 +4,5 @@ from products import views
 
 urlpatterns = [
     path('', views.goods),
-    path('<slug:slug_id>', views.mirror_page, name='mirror')
+    path('product/<slug:slug_id>/', views.mirror_page, name='mirror')
 ]
