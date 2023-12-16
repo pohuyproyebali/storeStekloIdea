@@ -20,18 +20,21 @@ def goods(request):
 def mirror_page(request, slug_id):
     mirror = get_object_or_404(Product, slug=slug_id)
     context = {
-        "product": mirror,
-        "cost": math.ceil(float(cost(product=mirror))),
-        "images": ImageToProduct.objects.filter(product=mirror.id),
-        "size": SizeToProduct.objects.get(product=mirror.id, initially=True).size,
-        "back_light": (
-            TypeBacklight.objects.get(id=BacklightToProduct.objects.get(product=mirror.id).typeBackLight.id).name if
-            BacklightToProduct.objects.filter(product=mirror.id).exists() else "нет"
-        ).lower(),
-        "basis": "фанера" if PlywoodBasisToProduct.objects.filter(product=mirror.id).exists() else "алюминевый профиль"
+        "mirror": {
+            "product": mirror,
+            "cost": math.ceil(float(cost(product=mirror))),
+            "images": ImageToProduct.objects.filter(product=mirror.id),
+            "size": SizeToProduct.objects.get(product=mirror.id, initially=True).size,
+            "back_light": (
+                TypeBacklight.objects.get(id=BacklightToProduct.objects.get(product=mirror.id).typeBackLight.id).name if
+                BacklightToProduct.objects.filter(product=mirror.id).exists() else "нет"
+            ).lower(),
+            "basis": "фанера" if PlywoodBasisToProduct.objects.filter(product=mirror.id).exists() else "алюминевый профиль"
+        },
+        "for_header": False
               }
 
-    return render(request, 'products/product_page.html', {'mirror': context})
+    return render(request, 'products/product_page.html', {'context': context})
 
 
 def cost(product: Product, size: SizeToProduct = None):

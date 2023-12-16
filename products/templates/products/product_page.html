@@ -1,4 +1,4 @@
-{% extends 'products/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
@@ -7,14 +7,14 @@
                 <div class="product__block">
                     <div class="product__show">
                         <div class="product__slide__block">
-                            {% for image in mirror.images %}
+                            {% for image in context.mirror.images %}
                             <div class="product__slide">
                                 <img src="{{ image.image.url }}" alt="" class="product-slide__img">
                             </div>
                             {% endfor %}
                         </div>
                         <div class="product__subslide__block">
-                            {% for image in mirror.images %}
+                            {% for image in context.mirror.images %}
                             <div class="product__subslide">
                                 <img src="{{ image.image.url }}" alt="" class="product-subslide__img">
                             </div>
@@ -23,23 +23,23 @@
                     </div>
                     <div class="product__description__block">
                         <div class="product__title">
-                            <p class="product__name">{{ mirror.product.name }}</p>
-                            <div class="product__price">{{ mirror.cost }} ₽</div>
+                            <p class="product__name">{{ context.mirror.product.name }}</p>
+                            <div class="product__price">{{ context.mirror.cost }} ₽</div>
                         </div>
                         <div class="product__description">
-                            <p class="description__main">{{ mirror.product.description }}</p>
+                            <p class="description__main">{{ context.mirror.product.description }}</p>
                             <p class="description__characteristic">
-                                <span class="characteristic-dark">Размер: </span>{{ mirror.size }}
+                                <span class="characteristic-dark">Размер: </span>{{ context.mirror.size }}
                             </p>
                             <p class="description__characteristic">
                                 <span class="characteristic-dark">Зеркало: </span>серебро
                             </p>
 
                             <p class="description__characteristic">
-                                <span class="characteristic-dark">Подсветка: </span>{{ mirror.back_light }}
+                                <span class="characteristic-dark">Подсветка: </span>{{ context.mirror.back_light }}
                             </p>
                             <p class="description__characteristic">
-                                <span class="characteristic-dark">Основа: </span>{{ mirror.basis }}
+                                <span class="characteristic-dark">Основа: </span>{{ context.mirror.basis }}
                             </p>
                         </div>
                         <div class="product__buy">

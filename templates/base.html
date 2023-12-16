@@ -37,16 +37,18 @@
                             <a class="nav__link" href="">
                                 <p class="nav__item nav__item-goods">Связь с нами</p>
                             </a>
+                            {% if not context.for_header %}
                             <div class="nav__link cart__link__block" href="">
                                 <div class="cart__link"></div>
                             </div>
+                            {% endif %}
                             <div class="header__burger header__burger-goods">
                                 <span></span>
                             </div>
                             <div class="header__burger__block">
                                 <div class="burger__nav">
                                     <p class="burger__logo">STEKLO&IDEA</p>
-                                    <a class="burger__nav__link" href="goods.html">
+                                    <a class="burger__nav__link" href="../products/templates/products/goods.html">
                                         <p class="burger__nav__item">Каталог</p>
                                     </a>
                                     <a class="burger__nav__link" href="">
@@ -82,9 +84,17 @@
                             </div>
                         </div>
                     </div>
+                    {% if context.for_header %}
+                    <div class="header__promo">
+                        <p class="promo__title">Отражение</br>ваших фантазий</p>
+                        <p class="promo__subtitle">В наших зеркалах</p>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
-            <div class="cart__block">
+            <!--      Сюда условие вставлять      -->
+            {% if not context.for_header %}
+                <div class="cart__block">
                 <div class="cart__header">
                     <p class="cart-header__title">Корзина</p>
                     <div class="cart-header__close"></div>
@@ -103,9 +113,66 @@
                     </div>
                 </div>
             </div>
+            {% else %}
+            <img class="header__bkg-img" src="img/header_bkg_img.png" alt="">
+            {% endif %}
         </header>
         {% block content %} {% endblock %}
-        <footer class="footer"></footer>
+        <footer class="footer">
+            <div class="container">
+                <div class="footer__block">
+                    <hr class="line line-white">
+                    <div class="title title-white">Контакты</div>
+                    <div class="footer__info">
+                        <div class="footer__contacts">
+                            <p class="footer__title">Россия</p>
+                            <p class="footer-contacts__item">STEKLO&IDEA</p>
+                            <p class="footer-contacts__item">Красноярск, ул. Кольцевая, 5</p>
+                            <a class="footer-contacts__item footer-item__bolder" href="tel:+79955721248">+7 (995) 572
+                                12-48</a>
+                            <p class="footer-contacts__item footer-item__bolder">qwerty@gmail.com</p>
+                            <div class="footer-contacts__social">
+                                <a class="footer-social__item" href="">
+                                    <img src="img/vk__white.svg" alt="">
+                                </a>
+                                <a class="footer-social__item" href="">
+                                    <img src="img/tg__white.svg" alt="">
+                                </a>
+                                <a class="footer-social__item" href="">
+                                    <img src="img/insta__white.svg" alt="">
+                                </a>
+                                <a class="footer-social__item" href="">
+                                    <img src="img/whatsapp__white.svg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="footer__links">
+                            <p class="footer__title">Ссылки</p>
+                            <div class="footer-links__block">
+                                <div class="footer-links__column">
+                                    <a href="" class="footer-links__item">Популярные зеркала</a>
+                                    <a href="" class="footer-links__item">Частые вопросы</a>
+                                    <a href="" class="footer-links__item">Связь с нами</a>
+                                </div>
+                                <div class="footer-links__column">
+                                    <a href="" class="footer-links__item">Проекты</a>
+                                    <a href="" class="footer-links__item">Каталог</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="footer__dev">
+                <div class="container">
+                    <div class="footer-dev__txt">
+                        <p class="copyright">Copyright by STEKLO&IDEA @2022-2023 </p>
+                        <p class="creators">Disigned by CSP</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
 </body>
 

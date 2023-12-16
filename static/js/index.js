@@ -53,7 +53,7 @@ $(document).ready(function () {
 
     });
 
-    $("body").on("scroll", function () {
+    $(window).on("scroll", function () {
         setTimeout(function () {
             $('.header__burger, .header__burger__block').removeClass('main__active');
         }, 500);
@@ -61,7 +61,7 @@ $(document).ready(function () {
 
 
     $(function () {
-        if ($(window).width() > 950) {
+        if ($(window).width() > 514) {
             scrollActive = true;
             scrollDirection = 0;
 
@@ -72,7 +72,7 @@ $(document).ready(function () {
             $scrollBlock = $('.horizontal-scroll__wrapper');
             $fixedWidth = $nav.outerWidth();
 
-            $scrollTotalWidth = $('.img__wrapper').width() * ($muchElements - 1) + 260 + 240;
+            $scrollTotalWidth = $('.img__wrapper').width() * ($muchElements - 1) + 260 + 180;
 
 
 
@@ -135,6 +135,51 @@ $(document).ready(function () {
                     }
                 }
             });
+        }
+        else {
+            const scrollContainer = new IScroll('.horizontal-scroll__wrapper', {
+                momentum: true // включаем инерцию
+            });
+            var startX = 0; // начальная позиция touchmove по оси X
+            var translateX = 0; // текущее смещение блока
+            $window = $(window);
+            $muchElements = $('.img__wrapper').length;
+            $scrollTotalWidth = $('.img__wrapper').width() * ($muchElements - 1) + 260 + 15;
+            $muchLeft = ($scrollTotalWidth - $window.width()) / $muchElements;
+
+            // определяем блок, который нужно смещать
+            var block = $('.horizontal-scroll__wrapper');
+
+            // обработчик события touchmove
+            block.on('touchmove', function (event) {
+                var touch = event.originalEvent.touches[0];
+                var moveX = touch.pageX;
+                console.log(touch)
+                if (startX > moveX && translateX > ($muchLeft * $muchElements) * -1) {
+                    // если пользователь двигался влево
+                    translateX -= startX - moveX + 3;
+                } else if (startX < moveX) {
+                    // если пользователь двигался вправо
+                    translateX += moveX - startX + 3;
+                }
+
+                console.log(($muchLeft * $muchElements) * -1)
+                console.log(translateX)
+                if (translateX > 0) {
+                    translateX = 0;
+                }
+                if (translateX > ($muchLeft * $muchElements) * -1) {
+                    block.css('transform', 'translateX(' + translateX + 'px)');
+                }
+                startX = moveX;
+            });
+
+            // обработчик события touchstart
+            block.on('touchstart', function (event) {
+                var touch = event.originalEvent.touches[0];
+                startX = touch.pageX;
+            });
+
         }
     });
 
@@ -203,15 +248,15 @@ $(document).ready(function () {
         swipe: false
     });
 
-    $('.parallax__slick').slick({
-        fade: false,
-        draggable: true,
-        swipe: true,
-        arrows: false,
-        infinite: false,
-        variableWidth: true,
-        slidesToShow: 2
-    });
+    // $('.parallax__slick').slick({
+    //     fade: false,
+    //     draggable: true,
+    //     swipe: true,
+    //     arrows: false,
+    //     infinite: false,
+    //     variableWidth: true,
+    //     slidesToShow: 2
+    // });
 
     $('.image-show__slider').slick({
         slidesToShow: 1,

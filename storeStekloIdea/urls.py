@@ -19,9 +19,14 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
+import pages.views
+from pages.views import *
+
 from products.views import goods
+from pages.views import *
 
 urlpatterns = [
+    path('', pages.views.main_page),
     path('admin/', admin.site.urls),
     path('goods/', include('products.urls')),
 ]
