@@ -26,7 +26,7 @@ from products.views import goods
 from pages.views import *
 
 urlpatterns = [
-    path('', pages.views.main_page),
+    path('', pages.views.main_page, name='main_page'),
     path('admin/', admin.site.urls),
     path('goods/', include('products.urls')),
 ]

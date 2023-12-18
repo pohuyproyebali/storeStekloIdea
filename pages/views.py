@@ -25,7 +25,8 @@ def main_page(request):
                             id=BacklightToProduct.objects.get(product=mirror.id).typeBackLight.id).name if
                         BacklightToProduct.objects.filter(product=mirror.id).exists() else "нет"
                     ).lower(),
-                    'image': ImageToProduct.objects.get(product=mirror.id, firstPhoto=True).image.url
+                    'image': ImageToProduct.objects.get(product=mirror.id, firstPhoto=True).image.url,
+                    'mirror_url': mirror.get_absolute_url
                 }
                 for mirror in mirrors
             }

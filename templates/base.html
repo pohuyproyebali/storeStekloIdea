@@ -25,11 +25,11 @@
             <div class="header__block header__block-goods">
                 <div class="container">
                     <div class="header__nav-block">
-                        <a href="index.html">
+                        <a href="{% url 'main_page' %}">
                             <p class="header__logo header__logo-goods">STEKLO&IDEA</p>
                         </a>
                         <div class="header__nav">
-                            <a class="nav__link" href="">
+                            <a class="nav__link" href="{% url 'main_page' %}">
                                 <p class="nav__item nav__item-goods">Главная</p>
                             </a>
                             <div class="nav__link cart__link__block">
@@ -65,11 +65,11 @@
             <div class="header__block">
                 <div class="container">
                     <div class="header__nav-block">
-                        <a href="index.html">
+                        <a href="{% url 'main_page' %}">
                             <p class="header__logo">STEKLO&IDEA</p>
                         </a>
                         <div class="header__nav">
-                            <a class="nav__link" href="goods.html">
+                            <a class="nav__link" href="{% url 'goods' %}">
                                 <p class="nav__item">Каталог</p>
                             </a>
                             <a class="nav__link" href="">
@@ -84,7 +84,7 @@
                             <div class="header__burger__block">
                                 <div class="burger__nav">
                                     <p class="burger__logo">STEKLO&IDEA</p>
-                                    <a class="burger__nav__link" href="goods.html">
+                                    <a class="burger__nav__link" href="{% url 'goods' %}">
                                         <p class="burger__nav__item">Каталог</p>
                                     </a>
                                     <a class="burger__nav__link" href="">
