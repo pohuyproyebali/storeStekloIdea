@@ -458,7 +458,7 @@ body {
     border-radius: 100px;
     height: 563px;
     width: 960px;
-    background: url(../img/popular-m-example.png);
+    object-fit: cover;
 }
 
 .show__description {

@@ -9,19 +9,18 @@
                     <p class="title title-white">Популярные зеркала</p>
                     <div class="popular-mirrors__block">
                         <div class="mirror-show">
+                            {% for key_mirror, value_mirror in context.mirrors.items %}
                             <div class="mirror__slide">
-                                <div class="show-img"></div>
+                                <div class="show-img__block">
+                                    <img src="{{ value_mirror.image }}" alt="" class="show-img">
+                                </div>
                                 <div class="show__description">
-                                    <p class="description__title">Зеркало в профиле с контурной подсветкой!</p>
+                                    <p class="description__title">{{ value_mirror.name }}</p>
                                     <div class="description__item-block">
-                                        <p class="description__item">Размер: <span class="show-dark">2100x600</span></p>
-                                        <p class="description__item">Материал: <span class="show-dark">серебро</span>
+                                        <p class="description__item">Размер: <span class="show-dark">{{ value_mirror.size }}</span></p>
+                                        <p class="description__item">Подсветка: <span class="show-dark">{{ value_mirror.back_light }}</span>
                                         </p>
-                                        <p class="description__item">Размер: <span class="show-dark">2100x600</span></p>
-                                        <p class="description__item">Подсветка: <span class="show-dark">теплая</span>
-                                        </p>
-                                        <p class="description__item">Основа: <span class="show-dark">алюминиевый
-                                                профиль</span>
+                                        <p class="description__item">Основа: <span class="show-dark">{{ value_mirror.basis }}</span>
                                         </p>
                                     </div>
                                     <a href="" class="show-btn__link">
@@ -29,126 +28,14 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="mirror__slide">
-                                <div class="show-img"></div>
-                                <div class="show__description">
-                                    <p class="description__title">Это второй</p>
-                                    <div class="description__item-block">
-                                        <p class="description__item">Размер: <span class="show-dark">2100x600</span></p>
-                                        <p class="description__item">Материал: <span class="show-dark">серебро</span>
-                                        </p>
-                                        <p class="description__item">Размер: <span class="show-dark">2100x600</span></p>
-                                        <p class="description__item">Подсветка: <span class="show-dark">теплая</span>
-                                        </p>
-                                        <p class="description__item">Основа: <span class="show-dark">алюминиевый
-                                                профиль</span>
-                                        </p>
-                                    </div>
-                                    <a href="" class="show-btn__link">
-                                        <div class="show__btn">Заказать</div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="mirror__slide">
-                                <div class="show-img"></div>
-                                <div class="show__description">
-                                    <p class="description__title">Да 52</p>
-                                    <div class="description__item-block">
-                                        <p class="description__item">Размер: <span class="show-dark">2100x600</span></p>
-                                        <p class="description__item">Материал: <span class="show-dark">серебро</span>
-                                        </p>
-                                        <p class="description__item">Размер: <span class="show-dark">2100x600</span></p>
-                                        <p class="description__item">Подсветка: <span class="show-dark">теплая</span>
-                                        </p>
-                                        <p class="description__item">Основа: <span class="show-dark">алюминиевый
-                                                профиль</span>
-                                        </p>
-                                    </div>
-                                    <a href="" class="show-btn__link">
-                                        <div class="show__btn">Заказать</div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="mirror__slide">
-                                <div class="show-img"></div>
-                                <div class="show__description">
-                                    <p class="description__title">Да 52</p>
-                                    <div class="description__item-block">
-                                        <p class="description__item">Размер: <span class="show-dark">2100x600</span></p>
-                                        <p class="description__item">Материал: <span class="show-dark">серебро</span>
-                                        </p>
-                                        <p class="description__item">Размер: <span class="show-dark">2100x600</span></p>
-                                        <p class="description__item">Подсветка: <span class="show-dark">теплая</span>
-                                        </p>
-                                        <p class="description__item">Основа: <span class="show-dark">алюминиевый
-                                                профиль</span>
-                                        </p>
-                                    </div>
-                                    <a href="" class="show-btn__link">
-                                        <div class="show__btn">Заказать</div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="mirror__slide">
-                                <div class="show-img"></div>
-                                <div class="show__description">
-                                    <p class="description__title">Да 52</p>
-                                    <div class="description__item-block">
-                                        <p class="description__item">Размер: <span class="show-dark">2100x600</span></p>
-                                        <p class="description__item">Материал: <span class="show-dark">серебро</span>
-                                        </p>
-                                        <p class="description__item">Размер: <span class="show-dark">2100x600</span></p>
-                                        <p class="description__item">Подсветка: <span class="show-dark">теплая</span>
-                                        </p>
-                                        <p class="description__item">Основа: <span class="show-dark">алюминиевый
-                                                профиль</span>
-                                        </p>
-                                    </div>
-                                    <a href="" class="show-btn__link">
-                                        <div class="show__btn">Заказать</div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="mirror__slide">
-                                <div class="show-img"></div>
-                                <div class="show__description">
-                                    <p class="description__title">Да 52</p>
-                                    <div class="description__item-block">
-                                        <p class="description__item">Размер: <span class="show-dark">2100x600</span></p>
-                                        <p class="description__item">Материал: <span class="show-dark">серебро</span>
-                                        </p>
-                                        <p class="description__item">Размер: <span class="show-dark">2100x600</span></p>
-                                        <p class="description__item">Подсветка: <span class="show-dark">теплая</span>
-                                        </p>
-                                        <p class="description__item">Основа: <span class="show-dark">алюминиевый
-                                                профиль</span>
-                                        </p>
-                                    </div>
-                                    <a href="" class="show-btn__link">
-                                        <div class="show__btn">Заказать</div>
-                                    </a>
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
                         <div class="mirror__nav">
-                            <div class="mirror__nav__item" data-id="0">
-                                <img src="img/popular-m-example.png" alt="" class="mirror__nav__item-img">
+                            {% for key_mirror, value_mirror in context.mirrors.items %}
+                            <div class="mirror__nav__item" data-id="{{ forloop.counter0 }}">
+                                <img src="{{ value_mirror.image }}" alt="" class="mirror__nav__item-img">
                             </div>
-                            <div class="mirror__nav__item" data-id="1">
-                                <img src="img/nav-ex.png" alt="" class="mirror__nav__item-img">
-                            </div>
-                            <div class="mirror__nav__item" data-id="2">
-                                <img src="img/nav-ex2.png" alt="" class="mirror__nav__item-img">
-                            </div>
-                            <div class="mirror__nav__item" data-id="3">
-                                <img src="img/popular-m-example.png" alt="" class="mirror__nav__item-img">
-                            </div>
-                            <div class="mirror__nav__item" data-id="4">
-                                <img src="img/nav-ex.png" alt="" class="mirror__nav__item-img">
-                            </div>
-                            <div class="mirror__nav__item" data-id="5">
-                                <img src="img/nav-ex2.png" alt="" class="mirror__nav__item-img">
-                            </div>
+                            {% endfor %}
                         </div>
                         <a href="" class="show-btn__link show-btn-mobile">
                             <div class="show__btn">Заказать</div>
