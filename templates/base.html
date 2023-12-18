@@ -20,6 +20,7 @@
 
 <body>
     <div class="wrapper">
+        {% if not context.for_header %}
         <header class="header header-goods">
             <div class="header__block header__block-goods">
                 <div class="container">
@@ -29,26 +30,61 @@
                         </a>
                         <div class="header__nav">
                             <a class="nav__link" href="">
-                                <p class="nav__item nav__item-goods">Каталог</p>
+                                <p class="nav__item nav__item-goods">Главная</p>
                             </a>
-                            <a class="nav__link" href="">
-                                <p class="nav__item nav__item-goods">Частые вопросы</p>
-                            </a>
-                            <a class="nav__link" href="">
-                                <p class="nav__item nav__item-goods">Связь с нами</p>
-                            </a>
-                            {% if not context.for_header %}
-                            <div class="nav__link cart__link__block" href="">
+                            <div class="nav__link cart__link__block">
                                 <div class="cart__link"></div>
                             </div>
-                            {% endif %}
-                            <div class="header__burger header__burger-goods">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="cart__block">
+                <div class="cart__header">
+                    <p class="cart-header__title">Корзина</p>
+                    <div class="cart-header__close"></div>
+                </div>
+                <div class="cart__main">
+                    <div class="cart__items">
+                    </div>
+                    <div class="cart__order">
+                        <p class="order__title">Оформить заказ</p>
+                        <div class="order__form">
+                            <input class="order-form__input" type="text" placeholder="Имя" name="" id="">
+                            <input class="order-form__input" type="text" placeholder="Номер телефона" name="" id="">
+                            <input class="order-form__input" type="text" placeholder="Город" name="" id="">
+                        </div>
+                        <div class="order__btn">Оставить заявку</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        {% else %}
+        <header class="header">
+            <div class="header__block">
+                <div class="container">
+                    <div class="header__nav-block">
+                        <a href="index.html">
+                            <p class="header__logo">STEKLO&IDEA</p>
+                        </a>
+                        <div class="header__nav">
+                            <a class="nav__link" href="goods.html">
+                                <p class="nav__item">Каталог</p>
+                            </a>
+                            <a class="nav__link" href="">
+                                <p class="nav__item">Частые вопросы</p>
+                            </a>
+                            <a class="nav__link" href="">
+                                <p class="nav__item">Связь с нами</p>
+                            </a>
+                            <div class="header__burger">
                                 <span></span>
                             </div>
                             <div class="header__burger__block">
                                 <div class="burger__nav">
                                     <p class="burger__logo">STEKLO&IDEA</p>
-                                    <a class="burger__nav__link" href="../products/templates/products/goods.html">
+                                    <a class="burger__nav__link" href="goods.html">
                                         <p class="burger__nav__item">Каталог</p>
                                     </a>
                                     <a class="burger__nav__link" href="">
@@ -84,39 +120,15 @@
                             </div>
                         </div>
                     </div>
-                    {% if context.for_header %}
                     <div class="header__promo">
                         <p class="promo__title">Отражение</br>ваших фантазий</p>
                         <p class="promo__subtitle">В наших зеркалах</p>
                     </div>
-                    {% endif %}
                 </div>
             </div>
-            <!--      Сюда условие вставлять      -->
-            {% if not context.for_header %}
-                <div class="cart__block">
-                <div class="cart__header">
-                    <p class="cart-header__title">Корзина</p>
-                    <div class="cart-header__close"></div>
-                </div>
-                <div class="cart__main">
-                    <div class="cart__items">
-                    </div>
-                    <div class="cart__order">
-                        <p class="order__title">Оформить заказ</p>
-                        <div class="order__form">
-                            <input class="order-form__input" type="text" placeholder="Имя" name="" id="">
-                            <input class="order-form__input" type="text" placeholder="Номер телефона" name="" id="">
-                            <input class="order-form__input" type="text" placeholder="Город" name="" id="">
-                        </div>
-                        <div class="order__btn">Оставить заявку</div>
-                    </div>
-                </div>
-            </div>
-            {% else %}
-            <img class="header__bkg-img" src="img/header_bkg_img.png" alt="">
-            {% endif %}
+            <img class="header__bkg-img" src="{{ context.image_next_to_the_slogan }}" alt="">
         </header>
+        {% endif %}
         {% block content %} {% endblock %}
         <footer class="footer">
             <div class="container">
