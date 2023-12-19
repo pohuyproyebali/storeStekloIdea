@@ -6,20 +6,91 @@ $(document).ready(function () {
 
     $('.sort-goods__item').click(function (event) {
         $(this).toggleClass('active');
+        $(this).next('.sort-goods__content').toggleClass('active').slideToggle(300, 'linear');
     });
 
-    $('.goods__sort__choose').click(function (event) {
+    $('.v2').click(function (event) {
+        $('.goods__item, .goods__block, .goods-item__img, .goods-item__name, .buy__cost, .buy__cost-mobile, .goods-line, .cart, .cart__txt-mobile, .goods-item__buy').addClass('active')
+        $('.filters__mobile').removeClass('active');
+        $('body').removeClass('active')
+    });
+
+    if ($(window).width() < 650) {
+        $('.goods__item, .goods__block, .goods-item__img, .goods-item__name, .buy__cost, .buy__cost-mobile, .goods-line, .cart, .cart__txt-mobile, .goods-item__buy').addClass('active')
+    }
+
+
+    $('.v1').click(function (event) {
+        $('.goods__item, .goods__block, .goods-item__img, .goods-item__name, .buy__cost, .buy__cost-mobile, .goods-line, .cart, .cart__txt-mobile, .goods-item__buy').removeClass('active')
+        $('.filters__mobile').removeClass('active');
+        $('body').removeClass('active')
+    });
+
+    $('.pagination__item').click(function (event) {
+        $('.pagination__item').removeClass('active');
+        $(this).addClass('active');
+    });
+
+    $('.pagination__arrows.next').click(function (event) {
+        $('.pagination__item.active').next('.pagination__item').addClass('active')
+        $('.pagination__item.active').prev().removeClass('active')
+    });
+
+    $('.pagination__arrows.next.first').click(function (event) {
+        $('.pagination__item').removeClass('active')
+        $('.pagination__item').last().addClass('active')
+    });
+
+    $('.pagination__arrows.prev').click(function (event) {
+        $('.pagination__item.active').prev('.pagination__item').addClass('active')
+        $('.pagination__item.active').next().removeClass('active')
+    });
+
+    $('.pagination__arrows.prev.first').click(function (event) {
+        $('.pagination__item').removeClass('active')
+        $('.pagination__item').first().addClass('active')
+    });
+
+    $('.goods__sort__choose, .sort__btn-m').click(function (event) {
         $(this).toggleClass('active');
         $('.goods__sort__block').toggleClass('active');
     });
 
-    $('.cart__link__block').click(function (event) {
-        $('.cart__block').toggleClass('active');
+    $('.filter-item__txt').click(function (event) {
+        $(this).siblings('.filter-mobile__open').slideToggle(300, 'linear');
     });
 
-    $('.cart-header__close').click(function (event) {
-        $('.cart__block').removeClass('active');
+    $('.filter__btn, .filter-close__btn').click(function (event) {
+        $('.filters__mobile').toggleClass('active');
+        $('body').toggleClass('active')
     });
+
+    $(window).on("scroll", function () {
+
+        $('.filters__mobile').removeClass('active');
+
+    });
+
+
+
+    $('.cart__link__block').click(function (event) {
+        $('.cart__block').toggleClass('active');
+        $('body').toggleClass('active-cart')
+    });
+
+    $('.cart-header__close.cart-close').click(function (event) {
+        $('.cart__block').removeClass('active');
+        $('body').removeClass('active-cart')
+    });
+
+    $('.order-m__btn').click(function (event) {
+        $('.cart__order').addClass('active');
+    });
+
+    $('.cart-header__close.order-close').click(function (event) {
+        $('.cart__order').removeClass('active');
+    });
+
 
     $('.projects__img').click(function (event) {
         let whatIs = $(this).data('id')
@@ -77,7 +148,7 @@ $(document).ready(function () {
 
 
             $window = $(window);
-            $h = $nav.offset().top;
+
 
             $windowBottom = $window.height();
 
@@ -94,6 +165,10 @@ $(document).ready(function () {
             });
 
             $window.scroll(function () {
+                if ($nav.hasClass('fixed') == false) {
+                    $h = $nav.offset().top;
+                }
+
                 $scrollUp = $nav.offset().top;
                 $muchLeft = ($scrollTotalWidth - $window.width()) / $muchElements;
                 $muchPadding = $muchLeft + 100;

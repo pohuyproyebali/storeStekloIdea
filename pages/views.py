@@ -14,6 +14,8 @@ info_for_page = {
 
 def main_page(request):
     mirrors = Product.objects.filter(onMainPage=True)
+    projects_for_page = TextForPage.objects.filter(text_type=TextType.objects.get(name='Projects-name'))
+
     context = {
         'image_next_to_the_slogan': ImageForPage.objects.get(
             image_type=ImageType.objects.get(name="Image next to the slogan on main page").id
@@ -38,14 +40,28 @@ def main_page(request):
         ,
         'for_header': True,
         'info_for_page': info_for_page,
-        'text_for_page':
-            {
-                'popular_block': TextForPage.objects.filter(text_type=TextType.objects.get(name='Titles'))[0].text,
-                'project_titles_block': TextForPage.objects.filter(text_type=TextType.objects.get(name='Titles'))[1].text,
+        'text_for_page': {
+            'block_titles': {
+                'popular_block_titles': TextForPage.objects.filter(text_type=TextType.objects.get(name='Titles'))[0].text,
+                'project_titles_block': TextForPage.objects.filter(text_type=TextType.objects.get(name='Titles'))[
+                    1].text,
                 'faq_titles_block': TextForPage.objects.filter(text_type=TextType.objects.get(name='Titles'))[2].text,
-                'development_process_titles_block': TextForPage.objects.filter(text_type=TextType.objects.get(name='Titles'))[3].text,
-                'contact_us_titles_block': TextForPage.objects.filter(text_type=TextType.objects.get(name='Titles'))[4].text,
-
+                'development_process_titles_block':
+                    TextForPage.objects.filter(text_type=TextType.objects.get(name='Titles'))[3].text,
+                'contact_us_titles_block': TextForPage.objects.filter(text_type=TextType.objects.get(name='Titles'))[
+                    4].text,
+            },
+            'projects': {
+                project: {
+                    'name_project': project.text,
+                    'city': Subtext.objects.get(for_text=project).text,
+                    'project_images': {
+                        image: {
+                            'image_url': image.image.url
+                        } for image in ImageToText.objects.filter(for_text=project)
+                    }
+                } for project in projects_for_page
             }
+        }
     }
     return render(request, 'index.html', {'context': context})

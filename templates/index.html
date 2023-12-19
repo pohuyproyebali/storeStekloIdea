@@ -6,7 +6,7 @@
             <div class="popular-mirrors">
                 <div class="container">
                     <hr class="line line-white">
-                    <p class="title title-white">{{ context.text_for_page.popular_block }}</p>
+                    <p class="title title-white">{{ context.text_for_page.block_titles.popular_block_titles }}</p>
                     <div class="popular-mirrors__block">
                         <div class="mirror-show">
                             {% for key_mirror, value_mirror in context.mirrors.items %}
@@ -44,76 +44,37 @@
                 </div>
             </div>
             <div class="projects">
-                <div class="projects__image-show is2">
-                    <div class="image-show__close"></div>
-                    <div class="image-show__slider">
-                        <div class="image-show__slide">
-                            <img data-id="is1" src="img/popular-m-example.png" alt="" class="image-show__img">
-                        </div>
-                        <div class="image-show__slide">
-                            <img data-id="is2" src="img/popular-m-example.png" alt="" class="image-show__img">
-                        </div>
-                        <div class="image-show__slide">
-                            <img data-id="is3" src="img/popular-m-example.png" alt="" class="image-show__img">
-                        </div>
-                        <div class="image-show__slide">
-                            <img data-id="is4" src="img/popular-m-example.png" alt="" class="image-show__img">
-                        </div>
-                        <div class="image-show__slide">
-                            <img data-id="is5" src="img/popular-m-example.png" alt="" class="image-show__img">
-                        </div>
-                    </div>
-                </div>
 
-                <div class="projects__image-show is1">
+                {% for key_project, project in context.text_for_page.projects.items %}
+                <div class="projects__image-show is{{ forloop.counter }}">
                     <div class="image-show__close"></div>
                     <div class="image-show__slider">
+                        {% for key_image, image in project.project_images.items %}
                         <div class="image-show__slide">
-                            <img data-id="is1" src="img/is1.png" alt="" class="image-show__img">
+                            <img data-id="is{{ forloop.counter }}" src="{{ image.image_url }}" alt="" class="image-show__img">
                         </div>
-                        <div class="image-show__slide">
-                            <img data-id="is2" src="img/popular-m-example.png" alt="" class="image-show__img">
-                        </div>
-                        <div class="image-show__slide">
-                            <img data-id="is3" src="img/popular-m-example.png" alt="" class="image-show__img">
-                        </div>
-                        <div class="image-show__slide">
-                            <img data-id="is4" src="img/popular-m-example.png" alt="" class="image-show__img">
-                        </div>
-                        <div class="image-show__slide">
-                            <img data-id="is5" src="img/popular-m-example.png" alt="" class="image-show__img">
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
+                {% endfor %}
                 <div class="container">
                     <hr class="line line-dark">
-                    <div class="title title-dark">{{ context.text_for_page.project_titles_block }}</div>
+                    <div class="title title-dark">{{ context.text_for_page.block_titles.project_titles_block }}</div>
                     <div class="projects__block">
                         <div class="projects__slider">
+                            {% for key_project, project in context.text_for_page.projects.items %}
                             <div class="projects__slide">
                                 <div class="projects-slide__images">
-                                    <img data-id="is1" src="img/is1.png" alt="" class="projects__img">
-                                    <img data-id="is1" src="img/is2.png" alt="" class="projects__img">
-                                    <img data-id="is1" src="img/is3.png" alt="" class="projects__img">
-                                    <img data-id="is1" src="img/is4.png" alt="" class="projects__img">
-                                    <img data-id="is1" src="img/is5.png" alt="" class="projects__img">
+                                    {% for key_image, image in project.project_images.items %}
+                                    <img data-id="is{{ forloop.counter }}" src="{{ image.image_url }}" alt="" class="projects__img">
+                                    {% endfor %}
                                 </div>
-                                <p class="projects-slide__title">Круглые зеркала в металлической раме для замка Шамони
+                                <p class="projects-slide__title">{{ project.name_project }}
                                 </p>
-                                <p class="projects-slide__subtitle">Красноярск.</p>
+                                <p class="projects-slide__subtitle">{{ project.city }}.</p>
 
                             </div>
-                            <div class="projects__slide">
-                                <div class="projects-slide__images">
-                                    <img data-id="is2" src="img/popular-m-example.png" alt="" class="projects__img">
-                                    <img data-id="is2" src="img/popular-m-example.png" alt="" class="projects__img">
-                                    <img data-id="is2" src="img/popular-m-example.png" alt="" class="projects__img">
-                                    <img data-id="is2" src="img/popular-m-example.png" alt="" class="projects__img">
-                                    <img data-id="is2" src="img/popular-m-example.png" alt="" class="projects__img">
-                                </div>
-                                <p class="projects-slide__title">Dnjhjq</p>
-                                <p class="projects-slide__subtitle">Красноярск.</p>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -121,7 +82,7 @@
             <div class="often-questions">
                 <div class="container">
                     <hr class="line line-white">
-                    <p class="title title-white">{{ context.text_for_page.faq_titles_block }}</p>
+                    <p class="title title-white">{{ context.text_for_page.block_titles.faq_titles_block }}</p>
                     <div class="often-questions__block">
                         <div class="question">
                             <hr class="line line-white line-question">
@@ -189,7 +150,7 @@
             <div class="parallax__fixed">
                 <div class="parallax__block">
                     <hr class="line line-dark txt-fixed">
-                    <div class="title title-dark txt-fixed">{{ context.text_for_page.development_process_titles_block }}</div>
+                    <div class="title title-dark txt-fixed">{{ context.text_for_page.block_titles.development_process_titles_block }}</div>
                     <div class="horizontal-scroll__wrapper">
                         <div class="img__wrapper">
                             <div class="img__block">
@@ -277,7 +238,7 @@
             <div class="contact-us">
                 <div class="container">
                     <hr class="line line-white">
-                    <div class="title title-white">{{ context.text_for_page.contact_us_titles_block }}</div>
+                    <div class="title title-white">{{ context.text_for_page.block_titles.contact_us_titles_block }}</div>
                     <div class="contact-us__block">
                         <div class="form__item">
                             <input placeholder="Имя" type="text" class="form__input">

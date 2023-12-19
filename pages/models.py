@@ -19,6 +19,16 @@ class TextForPage(models.Model):
         return f'Название: {self.name} | Тип: {self.text_type}'
 
 
+# Подтекст
+class Subtext(models.Model):
+    name = models.CharField(max_length=128)
+    text = models.TextField()
+    for_text = models.ForeignKey(to=TextForPage, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'Название: {self.name} | Относится к: {self.for_text}'
+
+
 # Тип каринки
 class ImageType(models.Model):
     name = models.CharField(max_length=128, unique=True)
@@ -35,3 +45,12 @@ class ImageForPage(models.Model):
 
     def __str__(self):
         return f'Название: {self.name} | Тип: {self.image_type}'
+
+
+class ImageToText(models.Model):
+    name = models.CharField(max_length=128, unique=True)
+    image = models.ImageField(upload_to='pages_images')
+    for_text = models.ForeignKey(to=TextForPage, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'Название: {self.name} | Относится к: {self.for_text}'
