@@ -3,8 +3,13 @@ from pages.models import *
 from products.models import Product, SizeToProduct, PlywoodBasisToProduct, TypeBacklight, BacklightToProduct, \
     ImageToProduct
 
-
 # Create your views here.
+
+
+info_for_page = {
+    'logo': TextForPage.objects.get(text_type=TextType.objects.get(name='Logo')).text,
+    'text_for_footer': TextForPage.objects.filter(text_type=TextType.objects.get(name='Titles'))[5].text,
+}
 
 
 def main_page(request):
@@ -31,6 +36,16 @@ def main_page(request):
                 for mirror in mirrors
             }
         ,
-        'for_header': True
+        'for_header': True,
+        'info_for_page': info_for_page,
+        'text_for_page':
+            {
+                'popular_block': TextForPage.objects.filter(text_type=TextType.objects.get(name='Titles'))[0].text,
+                'project_titles_block': TextForPage.objects.filter(text_type=TextType.objects.get(name='Titles'))[1].text,
+                'faq_titles_block': TextForPage.objects.filter(text_type=TextType.objects.get(name='Titles'))[2].text,
+                'development_process_titles_block': TextForPage.objects.filter(text_type=TextType.objects.get(name='Titles'))[3].text,
+                'contact_us_titles_block': TextForPage.objects.filter(text_type=TextType.objects.get(name='Titles'))[4].text,
+
+            }
     }
     return render(request, 'index.html', {'context': context})

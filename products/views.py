@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from products.models import *
 from django.http import HttpResponse
+from pages.views import info_for_page
 
 import math
 
@@ -13,8 +14,11 @@ def goods(request):
         "cost": math.ceil(float(cost(product=i))),
         "image": ImageToProduct.objects.get(product=i.id, firstPhoto=True)
     } for i in Product.objects.all()]
+    context = {
+        'info_for_page': info_for_page
+    }
 
-    return render(request, 'products/goods.html', {'mirror': data})
+    return render(request, 'products/goods.html', {'mirror': data, 'context': context})
 
 
 def mirror_page(request, slug_id):
@@ -31,6 +35,7 @@ def mirror_page(request, slug_id):
             ).lower(),
             "basis": "фанера" if PlywoodBasisToProduct.objects.filter(product=mirror.id).exists() else "алюминевый профиль"
         },
+        'info_for_page': info_for_page,
         "for_header": False
               }
 

@@ -6,7 +6,7 @@
             <div class="popular-mirrors">
                 <div class="container">
                     <hr class="line line-white">
-                    <p class="title title-white">Популярные зеркала</p>
+                    <p class="title title-white">{{ context.text_for_page.popular_block }}</p>
                     <div class="popular-mirrors__block">
                         <div class="mirror-show">
                             {% for key_mirror, value_mirror in context.mirrors.items %}
@@ -87,7 +87,7 @@
                 </div>
                 <div class="container">
                     <hr class="line line-dark">
-                    <div class="title title-dark">Проекты</div>
+                    <div class="title title-dark">{{ context.text_for_page.project_titles_block }}</div>
                     <div class="projects__block">
                         <div class="projects__slider">
                             <div class="projects__slide">
@@ -121,7 +121,7 @@
             <div class="often-questions">
                 <div class="container">
                     <hr class="line line-white">
-                    <p class="title title-white">Частые вопросы</p>
+                    <p class="title title-white">{{ context.text_for_page.faq_titles_block }}</p>
                     <div class="often-questions__block">
                         <div class="question">
                             <hr class="line line-white line-question">
@@ -189,7 +189,7 @@
             <div class="parallax__fixed">
                 <div class="parallax__block">
                     <hr class="line line-dark txt-fixed">
-                    <div class="title title-dark txt-fixed">Процесс разработки</div>
+                    <div class="title title-dark txt-fixed">{{ context.text_for_page.development_process_titles_block }}</div>
                     <div class="horizontal-scroll__wrapper">
                         <div class="img__wrapper">
                             <div class="img__block">
@@ -277,7 +277,7 @@
             <div class="contact-us">
                 <div class="container">
                     <hr class="line line-white">
-                    <div class="title title-white">Связь с нами</div>
+                    <div class="title title-white">{{ context.text_for_page.contact_us_titles_block }}</div>
                     <div class="contact-us__block">
                         <div class="form__item">
                             <input placeholder="Имя" type="text" class="form__input">
