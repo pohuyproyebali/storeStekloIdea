@@ -15,6 +15,8 @@ info_for_page = {
 def main_page(request):
     mirrors = Product.objects.filter(onMainPage=True)
     projects_for_page = TextForPage.objects.filter(text_type=TextType.objects.get(name='Projects-name'))
+    all_faq = TextForPage.objects.filter(text_type=TextType.objects.get(name='FAQ'))
+
 
     context = {
         'image_next_to_the_slogan': ImageForPage.objects.get(
@@ -61,7 +63,14 @@ def main_page(request):
                         } for image in ImageToText.objects.filter(for_text=project)
                     }
                 } for project in projects_for_page
-            }
+            },
+            'FAQ': {
+                FAQ: {
+                    'FAQ_name': FAQ.text,
+                    'FAQ_answer': Subtext.objects.get(for_text=FAQ).text
+                } for FAQ in all_faq
+            },
+            'development_process': {}
         }
     }
     return render(request, 'index.html', {'context': context})

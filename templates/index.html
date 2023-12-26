@@ -84,16 +84,20 @@
                     <hr class="line line-white">
                     <p class="title title-white">{{ context.text_for_page.block_titles.faq_titles_block }}</p>
                     <div class="often-questions__block">
+                        {% for FAQ_key, FAQ in context.text_for_page.FAQ.items %}
                         <div class="question">
                             <hr class="line line-white line-question">
                             <div class="questions__item">
                                 <div class="question__description">
-                                    <p class="question__num">1.</p>
-                                    <p class="question__title">Как происходит доставка?</p>
+                                    <p class="question__num">{{ forloop.counter }}.</p>
+                                    <p class="question__title">{{ FAQ.FAQ_name }}</p>
                                 </div>
                                 <div class="question__arrow"></div>
                             </div>
                             <div class="question__txt">
+                                {{ FAQ.FAQ_answer }}
+                            </div>
+                            <!-- <div class="question__txt">
                                 Доставка зеркал и в пределах Красноярска при заказе от <span
                                     class="question-txt__bold">30000 рублей</span> осуществляется
                                 бесплатно.
@@ -111,38 +115,9 @@
                                 любой другой по выбору заказчика). В обязательном порядке используется упаковка
                                 повышенной жесткости для предотвращения нанесения урона зеркалу в момент
                                 транспортировки.
-                            </div>
+                            </div> -->
                         </div>
-                        <div class="question">
-                            <hr class="line line-white line-question">
-                            <div class="questions__item">
-                                <div class="question__description">
-                                    <p class="question__num">2.</p>
-                                    <p class="question__title">Как оплатить товар?</p>
-                                </div>
-                                <div class="question__arrow"></div>
-                            </div>
-                            <div class="question__txt">
-                                Доставка зеркал и в пределах Красноярска при заказе от <span
-                                    class="question-txt__bold">30000 рублей</span> осуществляется
-                                бесплатно.
-                                <br><br>
-                                При заказе <span class="question-txt__bold">до 30000 рублей</span> стоимость доставки в
-                                пределах Красноярска составляет от <span class="question-txt__bold">800
-                                    рублей.</span>
-                                <br><br>
-                                При отсутствии в здании лифта (а так же при любых его неисправностях и малых габаритах)
-                                доставка производится до первого этажа. При ручном подъеме изделия цена за этаж
-                                составляет <span class="question-txt__bold">200 рублей</span>.
-                                <br><br>
-                                Доставка <span class="question-txt__bold">в регионы</span> осуществляется посредством
-                                курьерских служб (Деловые линии, ПЭК или
-                                любой другой по выбору заказчика). В обязательном порядке используется упаковка
-                                повышенной жесткости для предотвращения нанесения урона зеркалу в момент
-                                транспортировки.
-                            </div>
-                            <hr class="line line-white line-question-last">
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
