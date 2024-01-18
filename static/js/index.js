@@ -1,5 +1,12 @@
+window.onload = function () {
+    $('body').removeClass('preload__body')
+    $preloader = $('.preloader')
+    $preloader.addClass('preloader__hidden')
+    setTimeout(function () {
+        $preloader.addClass('preloader__none')
+    }, 950)
+}
 $(document).ready(function () {
-
     $('.header__burger').click(function (event) {
         $('.header__burger, .header__burger__block').toggleClass('main__active');
     });
@@ -22,7 +29,7 @@ $(document).ready(function () {
 
     $('.v1').click(function (event) {
         $('.goods__item, .goods__block, .goods-item__img, .goods-item__name, .buy__cost, .buy__cost-mobile, .goods-line, .cart, .cart__txt-mobile, .goods-item__buy').removeClass('active')
-        $('.filters__mobile').removeClass('active');
+        $('.filters__mobile').removeClass('active'); s
         $('body').removeClass('active')
     });
 
@@ -94,6 +101,7 @@ $(document).ready(function () {
 
     $('.projects__img').click(function (event) {
         let whatIs = $(this).data('id')
+        console.log($('.projects__image-show.' + whatIs + ''))
         $('.projects__image-show.' + whatIs + '').toggleClass('active');
     });
 
@@ -130,7 +138,6 @@ $(document).ready(function () {
         }, 500);
     });
 
-
     $(function () {
         if ($(window).width() > 514) {
             scrollActive = true;
@@ -143,12 +150,24 @@ $(document).ready(function () {
             $scrollBlock = $('.horizontal-scroll__wrapper');
             $fixedWidth = $nav.outerWidth();
 
-            $scrollTotalWidth = $('.img__wrapper').width() * ($muchElements - 1) + 260 + 180;
+            console.log($('.img__wrapper').width())
 
+            $scrollTotalWidth = $('.img__wrapper').width() * ($muchElements) + 180;
+
+
+
+            $koefScroll = 100 / ($scrollTotalWidth / 100)
+
+            $koefWidth = 100 / ($scrollTotalWidth / $nav.width())
+            $parallaxStatusBkg = $('.status__bkg').width();
+            $statusLineWidth = $parallaxStatusBkg / 100 * $koefWidth
+
+            $('.status__line').css({
+                width: '' + $statusLineWidth + 'px',
+            });
 
 
             $window = $(window);
-
 
             $windowBottom = $window.height();
 
@@ -171,33 +190,45 @@ $(document).ready(function () {
 
                 $scrollUp = $nav.offset().top;
                 $muchLeft = ($scrollTotalWidth - $window.width()) / $muchElements;
+                console.log($scrollTotalWidth)
                 $muchPadding = $muchLeft + 100;
-                console.log($muchLeft)
                 $parallaxFixed = $('.parallax__fixed');
                 $parallaxFixed.css('padding-bottom', $muchPadding * $muchElements + 'px')
 
-                if (scrollDirection == 1 && $window.scrollTop() + $window.height() < $scrollUp + 200 + $nav.height()) {
+                if (scrollDirection == 1 && $window.scrollTop() + $nav.height() + 200 < $scrollUp + 200 + $nav.height()) {
                     scrollActive = true
                     $nav.css({
-                        transform: 'translateY(0px)'
+                        transform: 'translateY(0px)',
                     });
+                    $h = $nav.offset().top;
                 }
                 if (scrollActive) {
+
                     var scrollMuch = $window.scrollTop() - $h;
+                    $koefScrollLine = ($parallaxStatusBkg / 100) * $koefScroll
+                    $scrollMuchKoef = (100 / ($koefScrollLine / 100)) / 100
+                    $scrollMuchLine = scrollMuch / $scrollMuchKoef
+
                     if ($nav.hasClass('fixed') == true) {
                         $scrollBlock.css({
                             transform: 'translateX(-' + scrollMuch + 'px)'
                         });
+
+                        if ($scrollMuchLine + $statusLineWidth < $parallaxStatusBkg) {
+                            $('.status__line').css({
+                                transform: 'translateX(' + $scrollMuchLine + 'px)'
+                            });
+                        }
                     }
+
                     if ($window.scrollTop() > $h) {
                         $nav.addClass('fixed');
+                        console.log('bag is here?')
                     }
                     else {
                         $nav.removeClass('fixed');
-                        $scrollBlock.css({
-                            transform: 'translateX(0px)'
-                        });
                     }
+
 
                     $muchScrollBottom = $muchPadding * $muchElements - 1000
 
@@ -206,6 +237,7 @@ $(document).ready(function () {
                         $nav.css({
                             transform: 'translateY(' + $muchScrollBottom + 'px)'
                         });
+
                         scrollActive = false;
                     }
                 }

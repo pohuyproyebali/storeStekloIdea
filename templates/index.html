@@ -127,14 +127,17 @@
                     <hr class="line line-dark txt-fixed">
                     <div class="title title-dark txt-fixed">{{ context.text_for_page.block_titles.development_process_titles_block }}</div>
                     <div class="horizontal-scroll__wrapper">
+                        {% for step_key, step in context.text_for_page.development_process.items %}
                         <div class="img__wrapper">
                             <div class="img__block">
-                                <img class="parallax__img" src="img/parallax1.svg" alt="">
+                                <img class="parallax__img" src="{{ step.step_image }}" alt="">
                                 <img class="parallax__arrow" src="img/parallax__arrow.svg" alt="">
                             </div>
-                            <p class="img-wrapper__title">01</p>
-                            <p class="img-wrapper__subtitle">Консультируем</p>
+                            <p class="img-wrapper__title">{{ forloop.counter }}</p>
+                            <p class="img-wrapper__subtitle">{{ step.step_text }}</p>
                         </div>
+                        {% endfor %}
+                        <!--
                         <div class="img__wrapper">
                             <div class="img__block">
                                 <img class="parallax__img" src="img/parallax2.svg" alt="">
@@ -207,6 +210,7 @@
                             <p class="img-wrapper__title">10</p>
                             <p class="img-wrapper__subtitle">Любуемся в отражение</p>
                         </div>
+                        -->
                     </div>
                 </div>
             </div>

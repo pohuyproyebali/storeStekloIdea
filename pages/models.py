@@ -29,7 +29,7 @@ class Subtext(models.Model):
         return f'Название: {self.name} | Относится к: {self.for_text}'
 
 
-# Тип каринки
+# Тип картинки
 class ImageType(models.Model):
     name = models.CharField(max_length=128, unique=True)
 
@@ -49,7 +49,7 @@ class ImageForPage(models.Model):
 
 class ImageToText(models.Model):
     name = models.CharField(max_length=128, unique=True)
-    image = models.ImageField(upload_to='pages_images')
+    image = models.FileField(upload_to='pages_images')
     for_text = models.ForeignKey(to=TextForPage, on_delete=models.CASCADE)
 
     def __str__(self):

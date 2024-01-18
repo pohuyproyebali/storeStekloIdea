@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from pages.models import *
 from products.models import Product, SizeToProduct, PlywoodBasisToProduct, TypeBacklight, BacklightToProduct, \
     ImageToProduct
@@ -16,7 +16,10 @@ def main_page(request):
     mirrors = Product.objects.filter(onMainPage=True)
     projects_for_page = TextForPage.objects.filter(text_type=TextType.objects.get(name='Projects-name'))
     all_faq = TextForPage.objects.filter(text_type=TextType.objects.get(name='FAQ'))
-
+    development_process_steps = sorted(
+        TextForPage.objects.filter(text_type=TextType.objects.get(name='Development-process')).values(),
+        key=lambda item: int(item['name'].split()[-1])
+    )
 
     context = {
         'image_next_to_the_slogan': ImageForPage.objects.get(
@@ -44,7 +47,8 @@ def main_page(request):
         'info_for_page': info_for_page,
         'text_for_page': {
             'block_titles': {
-                'popular_block_titles': TextForPage.objects.filter(text_type=TextType.objects.get(name='Titles'))[0].text,
+                'popular_block_titles': TextForPage.objects.filter(text_type=TextType.objects.get(name='Titles'))[
+                    0].text,
                 'project_titles_block': TextForPage.objects.filter(text_type=TextType.objects.get(name='Titles'))[
                     1].text,
                 'faq_titles_block': TextForPage.objects.filter(text_type=TextType.objects.get(name='Titles'))[2].text,
@@ -70,7 +74,14 @@ def main_page(request):
                     'FAQ_answer': Subtext.objects.get(for_text=FAQ).text
                 } for FAQ in all_faq
             },
-            'development_process': {}
+            'development_process': {
+                step['text']: {
+                    'step_text': step['text'],
+                    'step_image': ImageToText.objects.get(
+                        for_text=step['id']
+                    ).image.url if ImageToText.objects.filter(for_text=step['id']).exists() else 'aboba'
+                } for step in development_process_steps
+            }
         }
     }
     return render(request, 'index.html', {'context': context})
