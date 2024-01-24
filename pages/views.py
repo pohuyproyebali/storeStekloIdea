@@ -1,4 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+
+from orders.forms import OrderForm
 from pages.models import *
 from products.models import Product, SizeToProduct, PlywoodBasisToProduct, TypeBacklight, BacklightToProduct, \
     ImageToProduct
@@ -13,6 +15,14 @@ info_for_page = {
 
 
 def main_page(request):
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    else:
+        form = OrderForm()
+
     mirrors = Product.objects.filter(onMainPage=True)
     projects_for_page = TextForPage.objects.filter(text_type=TextType.objects.get(name='Projects-name'))
     all_faq = TextForPage.objects.filter(text_type=TextType.objects.get(name='FAQ'))
@@ -82,6 +92,7 @@ def main_page(request):
                     ).image.url if ImageToText.objects.filter(for_text=step['id']).exists() else 'aboba'
                 } for step in development_process_steps
             }
-        }
+        },
+        'form': form
     }
     return render(request, 'index.html', {'context': context})

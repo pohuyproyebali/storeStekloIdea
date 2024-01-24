@@ -3561,4 +3561,10 @@ body.active-cart {
         width: 145px;
         height: 40px;
     }
+
+    .form-error ul {
+    list-style: none;
+    padding: 0;
+    color: #CC0000;
+}
 }

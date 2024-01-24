@@ -219,20 +219,28 @@
                     <hr class="line line-white">
                     <div class="title title-white">{{ context.text_for_page.block_titles.contact_us_titles_block }}</div>
                     <div class="contact-us__block">
-                        <div class="form__item">
-                            <input placeholder="Имя" type="text" class="form__input">
-                        </div>
-                        <div class="form__item">
-                            <input placeholder="Номер телефона" type="text" class="form__input">
-                        </div>
-                        <div class="form__item">
-                            <input placeholder="Город" type="text" class="form__input">
-                        </div>
-                        <div class="form-textare__block">
-                            <p class="form__title">Ваш комментарий</p>
-                            <textarea class="form__textarea"></textarea>
-                        </div>
-                        <div class="contact-us__btn">Оставить заявку</div>
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <div class="form__item">
+                                <!--<label for="{{ form.name.id_for_label }}"></label>-->
+                                <!--<input placeholder="Имя" type="text" class="form__input" name="name">-->
+                                {{ context.form.name }}
+                            </div>
+                            <div class="form__item">
+                                {{ context.form.phone_number }}
+                            </div>
+                            <div class="form__item">
+                                {{ context.form.city }}
+                            </div>
+                            <div class="form__item">
+                                {{ context.form.user_email }}
+                            </div>
+                                <div class="form-textare__block">
+                                    <p class="form__title">Ваш комментарий</p>
+                               {{ context.form.comment }}
+                            </div>
+                            <button type="submit" class="contact-us__btn">Оставить заявку</button>
+                        </form>
                     </div>
                 </div>
             </div>
