@@ -29,6 +29,7 @@ urlpatterns = [
     path('', pages.views.main_page, name='main_page'),
     path('admin/', admin.site.urls),
     path('goods/', include('products.urls')),
+    path('basket/', include('orders.urls')),
 ]
 
 if settings.DEBUG:

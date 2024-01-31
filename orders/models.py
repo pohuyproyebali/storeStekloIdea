@@ -20,7 +20,7 @@ class Order(models.Model):
 class ProductToOrders(models.Model):
     order = models.ForeignKey(to=Order, on_delete=models.CASCADE)
     product = models.ForeignKey(to=Product, on_delete=models.CASCADE)
-    done = models.BooleanField()
+    done = models.BooleanField(default=False)
 
     def __str__(self):
         return f'Зеркало: {self.product} | Заказ: {self.order} | Выполнен: {self.done}'

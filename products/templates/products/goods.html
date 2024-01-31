@@ -91,7 +91,9 @@
                                     <a href="{{ mirror.product.get_absolute_url }}">
                                         <p class="buy__cost">{{ product.cost }} ₽</p>
                                     </a>
-                                    <div class="cart"></div>
+                                    <form action="{% url 'orders:add' product_id=product.product.id%}" method="post">{% csrf_token %}
+                                        <button type="submit" class="cart"></button>
+                                    </form>
                                 </div>
                                 <div class="goods-line"></div>
                             </div>

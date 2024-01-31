@@ -47,15 +47,42 @@
                 </div>
                 <div class="cart__main">
                     <div class="cart__items">
+                        {% for product_key, product_value in context.basket.items %}
+                        <div class="cart__item">
+                            <div class="cart-item__description">
+                                <img class="cart-item__img" src="{{ product_value.image.url }}" alt="">
+                                <div class="cart-item__title">{{ product_value.name }}</div>
+                                <div class="cart-item__close">
+                                    <form action="{% url 'orders:remove' product_id=product_value.product.id%}" method="post">{% csrf_token %}
+                                        <button type="submit" class="cart"></button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="cart-item__title mobile">{{ product_value.name }}</div>
+                            <div class="cart-item__line"></div>
+                            <div class="cart-item__buy">
+                                <p class="cart-item__cost">{{ product_value.cost }} ₽</p>
+                            </div>
+                        </div>
+                        {% endfor %}
                     </div>
                     <div class="cart__order">
                         <p class="order__title">Оформить заказ</p>
-                        <div class="order__form">
-                            <input class="order-form__input" type="text" placeholder="Имя" name="" id="">
-                            <input class="order-form__input" type="text" placeholder="Номер телефона" name="" id="">
-                            <input class="order-form__input" type="text" placeholder="Город" name="" id="">
-                        </div>
-                        <div class="order__btn">Оставить заявку</div>
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <div class="order__form">
+                                {{ context.form.name }}
+                                {{ context.form.phone_number }}
+                                {{ context.form.city }}
+                                {{ context.form.user_email }}
+                                <div class="form-textare__block">
+                                    <p class="form__title">Ваш комментарий</p>
+                                    {{ context.form.comment }}
+                                </div>
+                            </div>
+
+                            <button type="submit" class="order__btn">Оставить заявку</button>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
-from orders.forms import OrderForm
+from orders.models import *
+from orders.forms import OrderForm, order_form_create
 from pages.models import *
 from products.models import Product, SizeToProduct, PlywoodBasisToProduct, TypeBacklight, BacklightToProduct, \
     ImageToProduct
@@ -15,14 +16,7 @@ info_for_page = {
 
 
 def main_page(request):
-    if request.method == 'POST':
-        form = OrderForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('/')
-    else:
-        form = OrderForm()
-
+    form = order_form_create(request, main_page=True)
     mirrors = Product.objects.filter(onMainPage=True)
     projects_for_page = TextForPage.objects.filter(text_type=TextType.objects.get(name='Projects-name'))
     all_faq = TextForPage.objects.filter(text_type=TextType.objects.get(name='FAQ'))

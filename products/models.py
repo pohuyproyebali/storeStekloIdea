@@ -24,9 +24,9 @@ class Product(models.Model):
     description = models.TextField()
     form = models.ForeignKey(to=ProductForm, on_delete=models.CASCADE)
     fastening = models.ForeignKey(to=FasteningType, on_delete=models.CASCADE)
-    # basis = models.ForeignKey(to=Basis, on_delete=models.CASCADE)
     onMainPage = models.BooleanField()
     pesostruy = models.BooleanField()
+    is_published = models.BooleanField(default=False)
     slug = models.SlugField(max_length=255, db_index=True, unique=True)
 
     def __str__(self):

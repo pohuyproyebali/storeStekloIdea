@@ -1,4 +1,7 @@
 from django.shortcuts import render, get_object_or_404
+
+from orders.forms import OrderForm, order_form_create
+from orders.models import ProductToOrders
 from products.models import *
 from django.http import HttpResponse
 from pages.views import info_for_page
@@ -9,13 +12,25 @@ import math
 # Create your views here.
 
 def goods(request):
+    form = order_form_create(request)
     data = [{
         "product": i,
         "cost": math.ceil(float(cost(product=i))),
         "image": ImageToProduct.objects.get(product=i.id, firstPhoto=True)
-    } for i in Product.objects.all()]
+    } for i in Product.objects.filter(is_published=True)]
     context = {
-        'info_for_page': info_for_page
+        'info_for_page': info_for_page,
+        'basket':
+            {
+                f'product {product}': {
+                        'name': Product.objects.get(id=product['id']).name,
+                        'product': Product.objects.get(id=product['id']),
+                        'image': ImageToProduct.objects.get(product=product['id'], firstPhoto=True).image,
+                        'cost': math.ceil(float(cost(product=Product.objects.get(id=product['id']))))
+                    }
+                for product in request.session.get('basket')
+            } if request.session.get('basket') else {},
+        'form': form
     }
 
     return render(request, 'products/goods.html', {'mirror': data, 'context': context})
@@ -33,11 +48,12 @@ def mirror_page(request, slug_id):
                 TypeBacklight.objects.get(id=BacklightToProduct.objects.get(product=mirror.id).typeBackLight.id).name if
                 BacklightToProduct.objects.filter(product=mirror.id).exists() else "нет"
             ).lower(),
-            "basis": "фанера" if PlywoodBasisToProduct.objects.filter(product=mirror.id).exists() else "алюминевый профиль"
+            "basis": "фанера" if PlywoodBasisToProduct.objects.filter(
+                product=mirror.id).exists() else "алюминевый профиль"
         },
         'info_for_page': info_for_page,
         "for_header": False
-              }
+    }
 
     return render(request, 'products/product_page.html', {'context': context})
 
@@ -74,7 +90,8 @@ def cost(product: Product, size: SizeToProduct = None):
             cost_product += 4000 if S < 2 else 5000 if S < 3 else 6000
     if BacklightToProduct.objects.filter(product=product.id).exists():
         back_light = \
-            TypeBacklight.objects.filter(id=BacklightToProduct.objects.filter(product=product.id)[0].typeBackLight.id)[0]
+            TypeBacklight.objects.filter(id=BacklightToProduct.objects.filter(product=product.id)[0].typeBackLight.id)[
+                0]
         cost_product += (math.ceil(P / (5 / back_light.quantityBlocks)) * 800) + (
                 math.ceil(P / 5) * back_light.cost)  # Световая лента
         cost_product += 1100  # Рассходники
