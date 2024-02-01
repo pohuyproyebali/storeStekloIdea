@@ -18,7 +18,7 @@
     <title>{{ context.info_for_page.logo }}</title>
 </head>
 
-<body>
+<body class="preload__body">
     <div class="wrapper">
         {% if not context.for_header %}
         <header class="header header-goods">
@@ -40,23 +40,28 @@
                     </div>
                 </div>
             </div>
-                <div class="cart__block">
+            <div class="cart__block">
                 <div class="cart__header">
                     <p class="cart-header__title">Корзина</p>
-                    <div class="cart-header__close"></div>
+                    <div class="cart-header__close cart-close cross"></div>
                 </div>
-                <div class="cart__main">
+                {% if not context.basket %}<div class="cart__header no-goods visible">
+                    <p class="cart-header__title no-goods">В корзине нет товаров</p>
+                </div> {% endif %}
+                <div class="cart__main {% if not context.basket %} invisible {% endif %}">
                     <div class="cart__items">
                         {% for product_key, product_value in context.basket.items %}
                         <div class="cart__item">
                             <div class="cart-item__description">
                                 <img class="cart-item__img" src="{{ product_value.image.url }}" alt="">
                                 <div class="cart-item__title">{{ product_value.name }}</div>
-                                <div class="cart-item__close">
-                                    <form action="{% url 'orders:remove' product_id=product_value.product.id%}" method="post">{% csrf_token %}
-                                        <button type="submit" class="cart"></button>
-                                    </form>
-                                </div>
+
+                                <form class="cart-item__close-form"
+                                    action="{% url 'orders:remove' product_id=product_value.product.id%}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="cart-item__close cross"></button>
+                                </form>
+
                             </div>
                             <div class="cart-item__title mobile">{{ product_value.name }}</div>
                             <div class="cart-item__line"></div>
@@ -67,7 +72,10 @@
                         {% endfor %}
                     </div>
                     <div class="cart__order">
-                        <p class="order__title">Оформить заказ</p>
+                        <div class="order__header">
+                            <p class="order__title">Оформить заказ</p>
+                            <div class="cart-header__close order-close cross"></div>
+                        </div>
                         <form action="" method="post">
                             {% csrf_token %}
                             <div class="order__form">
@@ -75,14 +83,17 @@
                                 {{ context.form.phone_number }}
                                 {{ context.form.city }}
                                 {{ context.form.user_email }}
-                                <div class="form-textare__block">
-                                    <p class="form__title">Ваш комментарий</p>
+                                <div class="form-textarea__block">
+                                    <p class="form__title form__title-light">Ваш комментарий</p>
                                     {{ context.form.comment }}
                                 </div>
                             </div>
 
-                            <button type="submit" class="order__btn">Оставить заявку</button>
+                            <button type="submit" class="order__btn btn-dark">Оставить заявку</button>
                         </form>
+                    </div>
+                    <div class="cart__order-m">
+                        <div class="order-m__btn btn-dark">Оформить заказ</div>
                     </div>
                 </div>
             </div>
@@ -99,10 +110,10 @@
                             <a class="nav__link" href="{% url 'goods' %}">
                                 <p class="nav__item">Каталог</p>
                             </a>
-                            <a class="nav__link" href="">
+                            <a class="nav__link" href="#often-questions">
                                 <p class="nav__item">Частые вопросы</p>
                             </a>
-                            <a class="nav__link" href="">
+                            <a class="nav__link" href="#contact-us">
                                 <p class="nav__item">Связь с нами</p>
                             </a>
                             <div class="header__burger">
@@ -114,33 +125,34 @@
                                     <a class="burger__nav__link" href="{% url 'goods' %}">
                                         <p class="burger__nav__item">Каталог</p>
                                     </a>
-                                    <a class="burger__nav__link" href="">
+                                    <a class="burger__nav__link" href="#often-questions">
                                         <p class="burger__nav__item">Частые вопросы</p>
                                     </a>
-                                    <a class="burger__nav__link" href="">
+                                    <a class="burger__nav__link" href="#contact-us">
                                         <p class="burger__nav__item">Связь с нами</p>
                                     </a>
-                                    <a class="burger__nav__link" href="">
+                                    <a class="burger__nav__link" href="#popular-mirrors">
                                         <p class="burger__nav__item">Популярные зеркала</p>
                                     </a>
-                                    <a class="burger__nav__link" href="">
+                                    <a class="burger__nav__link" href="#projects">
                                         <p class="burger__nav__item">Проекты</p>
                                     </a>
-                                    <a class="burger__nav__link" href="">
+                                    <a class="burger__nav__link" href="#parallax__fixed">
                                         <p class="burger__nav__item">Процесс разработки</p>
                                     </a>
                                 </div>
                                 <div class="burger__social">
-                                    <a class="social__link" href="">
+                                    <a class="social__link" target="_blank" href="https://vk.com/steklo_idea">
                                         <img src="{% static '/img/vk.svg' %}" alt="" class="social__item">
                                     </a>
-                                    <a class="social__link" href="">
+                                    <a class="social__link" target="_blank" href="https://t.me/Custom_Mirrors_Store">
                                         <img src="{% static '/img/tg.svg' %}" alt="" class="social__item">
                                     </a>
-                                    <a class="social__link" href="">
+                                    <a class="social__link" target="_blank"
+                                        href="https://www.instagram.com/steklo_idea/">
                                         <img src="{% static '/img/insta.svg' %}" alt="" class="social__item">
                                     </a>
-                                    <a class="social__link" href="">
+                                    <a class="social__link" target="_blank" href="https://wa.me/79080134860">
                                         <img src="{% static '/img/whatsapp.svg' %}" alt="" class="social__item">
                                     </a>
                                 </div>
@@ -167,20 +179,23 @@
                             <p class="footer__title">Россия</p>
                             <p class="footer-contacts__item">{{ context.info_for_page.logo }}</p>
                             <p class="footer-contacts__item">Красноярск, ул. Кольцевая, 5</p>
-                            <a class="footer-contacts__item footer-item__bolder" href="tel:+79955721248">+7 (995) 572
-                                12-48</a>
-                            <p class="footer-contacts__item footer-item__bolder">qwerty@gmail.com</p>
+                            <a class="footer-contacts__item footer-item__bolder" href="tel:+79080134860">
+                                +7 (908) 013 48-60
+                            </a>
+                            <a href="mailto:vlad@htmlbook.ru"
+                                class="footer-contacts__item footer-item__bolder">steklo_idey@mail.ru</a>
                             <div class="footer-contacts__social">
-                                <a class="footer-social__item" href="">
+                                <a class="footer-social__item" target="_blank" href="https://vk.com/steklo_idea">
                                     <img src="img/vk__white.svg" alt="">
                                 </a>
-                                <a class="footer-social__item" href="">
+                                <a class="footer-social__item" target="_blank" href="https://t.me/Custom_Mirrors_Store">
                                     <img src="img/tg__white.svg" alt="">
                                 </a>
-                                <a class="footer-social__item" href="">
+                                <a class="footer-social__item" target="_blank"
+                                    href="https://www.instagram.com/steklo_idea/">
                                     <img src="img/insta__white.svg" alt="">
                                 </a>
-                                <a class="footer-social__item" href="">
+                                <a class="footer-social__item" target="_blank" href="https://wa.me/79080134860">
                                     <img src="img/whatsapp__white.svg" alt="">
                                 </a>
                             </div>
@@ -189,12 +204,13 @@
                             <p class="footer__title">Ссылки</p>
                             <div class="footer-links__block">
                                 <div class="footer-links__column">
-                                    <a href="" class="footer-links__item">Популярные зеркала</a>
-                                    <a href="" class="footer-links__item">Частые вопросы</a>
-                                    <a href="" class="footer-links__item">Связь с нами</a>
+                                    <a href="#popular-mirrors" class="footer-links__item">Популярные зеркала</a>
+                                    <a href="#often-questions" class="footer-links__item">Частые вопросы</a>
+                                    <a href="#contact-us" class="footer-links__item">Связь с нами</a>
                                 </div>
                                 <div class="footer-links__column">
-                                    <a href="" class="footer-links__item">Проекты</a>
+                                    <a href="#projects" class="footer-links__item">Проекты</a>
+                                    <a href="#parallax__fixed" class="footer-links__item">Процесс разработки</a>
                                     <a href="{% url 'goods' %}" class="footer-links__item">Каталог</a>
                                 </div>
                             </div>
@@ -212,6 +228,57 @@
                 </div>
             </div>
         </footer>
+        <div class="preloader">
+            <div class="preloader__block">
+                <svg class="preloader__img" width="320" height="278" viewBox="0 0 482 418" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M204.14 395.678L208.762 396.299C208.569 398.164 208.729 399.77 209.243 401.117C209.776 402.451 210.787 403.666 212.276 404.764C213.768 405.845 215.546 406.617 217.611 407.08C219.444 407.491 221.124 407.582 222.65 407.352C224.176 407.122 225.384 406.612 226.272 405.822C227.181 405.02 227.761 404.057 228.013 402.934C228.269 401.795 228.161 400.73 227.689 399.739C227.221 398.732 226.292 397.769 224.902 396.85C224.013 396.251 221.989 395.181 218.831 393.64C215.676 392.082 213.51 390.798 212.331 389.788C210.801 388.49 209.756 387.076 209.197 385.545C208.659 384.002 208.577 382.396 208.951 380.728C209.363 378.895 210.266 377.302 211.663 375.95C213.063 374.581 214.855 373.708 217.038 373.331C219.222 372.954 221.536 373.039 223.981 373.588C226.673 374.192 228.945 375.161 230.796 376.496C232.668 377.818 233.969 379.446 234.697 381.379C235.426 383.312 235.592 385.353 235.197 387.502L230.511 386.815C230.778 384.463 230.325 382.54 229.151 381.045C227.994 379.554 226.02 378.495 223.228 377.869C220.321 377.216 218.079 377.277 216.5 378.05C214.941 378.811 213.994 379.943 213.656 381.446C213.364 382.75 213.593 383.93 214.346 384.983C215.082 386.033 217.299 387.441 220.996 389.208C224.714 390.961 227.226 392.332 228.531 393.318C230.427 394.767 231.709 396.356 232.38 398.085C233.054 399.798 233.172 401.629 232.735 403.577C232.301 405.51 231.338 407.211 229.846 408.68C228.358 410.133 226.466 411.105 224.17 411.596C221.894 412.074 219.46 412.022 216.867 411.441C213.58 410.703 210.929 409.605 208.914 408.147C206.916 406.692 205.496 404.865 204.654 402.663C203.832 400.449 203.661 398.121 204.14 395.678Z"
+                        fill="#484848" />
+                    <path
+                        d="M247.822 415.749L249.876 382.984L237.636 382.216L237.911 377.832L267.357 379.678L267.082 384.062L254.792 383.292L252.738 416.058L247.822 415.749Z"
+                        fill="#484848" />
+                    <path
+                        d="M271.576 417.155L270.141 379.96L297.035 378.922L297.204 383.312L275.232 384.16L275.672 395.552L296.248 394.757L296.417 399.121L275.84 399.916L276.329 412.576L299.163 411.695L299.333 416.084L271.576 417.155Z"
+                        fill="#484848" />
+                    <path
+                        d="M308.185 414.227L298.972 378.162L303.745 376.943L308.313 394.828L321.654 372.368L328.124 370.715L316.727 389.193L338.001 406.61L331.703 408.219L314.199 393.246L309.765 400.51L312.957 413.008L308.185 414.227Z"
+                        fill="#484848" />
+                    <path
+                        d="M342.7 405.009L328.297 370.686L332.839 368.78L345.543 399.052L362.447 391.959L364.146 396.009L342.7 405.009Z"
+                        fill="#484848" />
+                    <path
+                        d="M360.469 377.943C356.779 372.987 355.224 368.12 355.803 363.342C356.372 358.55 358.761 354.587 362.97 351.454C365.726 349.402 368.701 348.21 371.895 347.88C375.088 347.549 378.142 348.136 381.054 349.639C383.971 351.118 386.541 353.352 388.765 356.339C391.019 359.367 392.424 362.53 392.982 365.83C393.539 369.129 393.157 372.231 391.836 375.134C390.506 378.024 388.544 380.434 385.951 382.365C383.14 384.457 380.123 385.648 376.899 385.938C373.675 386.228 370.618 385.623 367.729 384.123C364.84 382.623 362.42 380.563 360.469 377.943ZM364.588 374.971C367.266 378.569 370.343 380.689 373.817 381.331C377.295 381.95 380.494 381.172 383.413 378.999C386.387 376.785 388.052 373.92 388.41 370.404C388.782 366.878 387.537 363.193 384.676 359.351C382.867 356.921 380.876 355.111 378.703 353.922C376.534 352.709 374.286 352.198 371.96 352.389C369.637 352.557 367.491 353.374 365.522 354.84C362.725 356.922 361.033 359.68 360.445 363.114C359.861 366.525 361.242 370.477 364.588 374.971Z"
+                        fill="#484848" />
+                    <path
+                        d="M427.403 340.168C427.61 342.412 427.421 344.474 426.836 346.353C426.238 348.221 425.238 349.913 423.835 351.429C421.249 354.225 418.253 355.57 414.847 355.463C412.077 355.367 409.741 354.44 407.839 352.682C406.149 351.119 405.127 349.17 404.772 346.836C404.417 344.478 404.724 341.741 405.692 338.625C403.138 338.545 401.23 338.302 399.968 337.896C398.706 337.49 397.665 336.908 396.845 336.149C395.205 334.632 394.374 332.676 394.353 330.281C394.33 327.862 395.221 325.677 397.026 323.726C398.75 321.862 400.729 320.869 402.965 320.746C405.211 320.61 407.136 321.284 408.739 322.767C411.336 325.169 411.962 328.941 410.618 334.085L421.396 334.958C420.82 333.387 419.955 331.78 418.801 330.136L422.77 327.34C424.605 330.143 425.821 332.767 426.419 335.211C429.245 335.497 431.959 335.367 434.561 334.822L435.141 339.543C433.018 340.093 430.439 340.301 427.403 340.168ZM406.852 333.818C407.34 331.571 407.455 329.938 407.2 328.918C406.956 327.885 406.443 327.007 405.66 326.283C404.728 325.42 403.694 325.018 402.558 325.074C401.422 325.106 400.445 325.564 399.629 326.446C398.79 327.353 398.381 328.381 398.402 329.53C398.434 330.667 398.873 331.626 399.718 332.408C400.14 332.798 400.686 333.106 401.353 333.332C402.02 333.534 402.815 333.658 403.739 333.706L406.852 333.818ZM422.808 339.826L409.495 338.926C408.898 341.74 408.772 343.895 409.118 345.391C409.452 346.875 410.072 348.037 410.979 348.876C412.085 349.899 413.642 350.521 415.651 350.742C417.66 350.963 419.412 350.266 420.906 348.65C421.837 347.644 422.486 346.319 422.853 344.676C423.22 343.008 423.204 341.392 422.808 339.826Z"
+                        fill="#484848" />
+                    <path d="M449.76 319.26L418.314 299.342L420.95 295.181L452.395 315.099L449.76 319.26Z"
+                        fill="#484848" />
+                    <path
+                        d="M457.117 306.534L423.093 291.439L428.293 279.718C429.467 277.072 430.525 275.125 431.468 273.877C432.782 272.126 434.332 270.824 436.119 269.968C438.431 268.846 440.967 268.369 443.726 268.538C446.476 268.684 449.367 269.43 452.4 270.775C454.984 271.921 457.14 273.239 458.868 274.728C460.596 276.217 461.908 277.725 462.805 279.253C463.686 280.773 464.255 282.266 464.512 283.732C464.76 285.176 464.724 286.78 464.404 288.545C464.091 290.295 463.477 292.199 462.564 294.257L457.117 306.534ZM455.1 300.25L458.323 292.986C459.318 290.743 459.888 288.894 460.034 287.44C460.186 285.97 460.051 284.688 459.629 283.594C459.035 282.052 457.971 280.589 456.437 279.205C454.895 277.799 452.839 276.525 450.271 275.386C446.712 273.807 443.72 273.183 441.295 273.515C438.862 273.824 436.949 274.67 435.558 276.053C434.559 277.054 433.465 278.892 432.277 281.569L429.106 288.718L455.1 300.25Z"
+                        fill="#484848" />
+                    <path
+                        d="M472.239 270.293L436.057 261.554L442.376 235.392L446.645 236.423L441.483 257.797L452.565 260.473L457.399 240.457L461.644 241.482L456.81 261.499L469.125 264.473L474.491 242.261L478.76 243.292L472.239 270.293Z"
+                        fill="#484848" />
+                    <path
+                        d="M480.593 239.447L443.798 224.084L443.951 218.779L481.598 204.626L481.436 210.235L470.042 214.25L469.593 229.807L480.744 234.219L480.593 239.447ZM465.624 228.27L465.988 215.656L455.572 219.242C452.407 220.336 449.81 221.141 447.78 221.659C450.152 222.201 452.502 222.938 454.828 223.869L465.624 228.27Z"
+                        fill="#484848" />
+                    <path
+                        d="M81.1133 232.999C98.6147 233.5 90.1147 241 84.1133 241.499C76.1147 242.5 54.6147 247.5 45.1147 252.5C28.6147 260.5 6.91475 270.6 12.1147 287C17.3147 303.4 49.6147 304.5 65.1147 303C90.6147 303 139.448 290.327 164.115 277.5C176.615 271 209.615 253.5 225.115 232.999C239.115 214.481 233.615 209.332 228.615 207C224.215 201.4 180.615 198 159.615 194.5C144.268 191.942 115.815 191.1 100.615 175.5C85.4147 159.9 100.948 135.667 110.615 125.5C125.815 107.5 194.115 74.4991 249.115 63.9995C253.615 63.5 290.115 52.4999 321.115 59.9996C346.215 66.0718 336.781 89.6662 329.115 99.9995C324.315 110 285.615 143 258.615 149.5C249.448 150.833 231.715 150.1 234.115 136.5C236.515 122.9 263.781 109.5 277.115 104.5C283.115 102 285.615 106 283.615 107C277.115 110.25 259.448 120.333 249.615 127.5C247.448 129.166 244.315 132.8 249.115 134C255.115 135.5 289.115 122 314.615 99.9995C335.015 82.3995 321.448 75.6659 312.115 74.4991C256.515 67.2991 156.615 105.999 115.115 137.499C93.1147 155.999 112.115 166.999 125.115 169.999C151.615 177.999 202.115 174.999 226.615 187.999C252.215 200.799 246.115 228.499 237.113 238.999C211.613 279.499 134.615 324.499 53.1133 320.999C-1.24984 318.665 -3.55338 291.499 2.11329 275.999C5.31329 258.399 55.6133 232.999 81.1133 232.999Z"
+                        fill="#484848" />
+                    <path
+                        d="M272.115 4C377.089 4 463.032 85.4861 470.139 188.656L474.142 188.553C466.977 83.2209 379.264 0 272.115 0C213.987 0 161.58 24.4915 124.649 63.7181L127.311 66.7271C163.525 28.1191 215.003 4 272.115 4Z"
+                        fill="#484848" />
+                    <path
+                        d="M126.231 337.113L122.799 339.29C140.474 358.574 161.836 374.423 185.769 385.721L187.554 382.14C164.28 371.165 143.483 355.8 126.231 337.113Z"
+                        fill="#484848" />
+                </svg>
+
+                <span class="loader"></span>
+            </div>
+
+        </div>
     </div>
 </body>
 

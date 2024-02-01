@@ -23,9 +23,9 @@ def add_to_basket(request, product_id):
             'id': product_id,
         }
 
-        if product_id not in basket_ids_list:
-            request.session['basket'].append(app_data)
-            request.session.modified = True
+        request.session['basket'].append(app_data)
+        request.session.modified = True
+        print(request.session['basket'])
 
     return redirect('goods')
 

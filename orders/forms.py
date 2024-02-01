@@ -25,6 +25,7 @@ class OrderForm(forms.ModelForm):
         self.fields['name'].widget.attrs.update({'class': class_field})
         self.fields['city'].widget.attrs.update({'class': class_field})
         self.fields['user_email'].widget.attrs.update({'class': class_field})
+        self.fields['comment'].widget.attrs.update({'class': 'form__textarea' if main_page else 'form__textarea-light'})
 
     class Meta:
         model = Order

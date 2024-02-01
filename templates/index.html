@@ -2,102 +2,108 @@
 {% load static %}
 
 {% block content %}
-    <main class="main">
-            <div class="popular-mirrors">
-                <div class="container">
-                    <hr class="line line-white">
-                    <p class="title title-white">{{ context.text_for_page.block_titles.popular_block_titles }}</p>
-                    <div class="popular-mirrors__block">
-                        <div class="mirror-show">
-                            {% for key_mirror, value_mirror in context.mirrors.items %}
-                            <div class="mirror__slide">
-                                <div class="show-img__block">
-                                    <img src="{{ value_mirror.image }}" alt="" class="show-img">
-                                </div>
-                                <div class="show__description">
-                                    <p class="description__title">{{ value_mirror.name }}</p>
-                                    <div class="description__item-block">
-                                        <p class="description__item">Размер: <span class="show-dark">{{ value_mirror.size }}</span></p>
-                                        <p class="description__item">Подсветка: <span class="show-dark">{{ value_mirror.back_light }}</span>
-                                        </p>
-                                        <p class="description__item">Основа: <span class="show-dark">{{ value_mirror.basis }}</span>
-                                        </p>
-                                    </div>
-                                    <a href="{{ value_mirror.mirror_url }}" class="show-btn__link">
-                                        <div class="show__btn">Перейти к зеркалу</div>
-                                    </a>
-                                </div>
-                            </div>
-                            {% endfor %}
+<main class="main">
+    <div id="popular-mirrors" class="popular-mirrors">
+        <div class="container">
+            <hr class="line line-white">
+            <p class="title title-white">{{ context.text_for_page.block_titles.popular_block_titles }}</p>
+            <div class="popular-mirrors__block">
+                <div class="mirror-show">
+                    {% for key_mirror, value_mirror in context.mirrors.items %}
+                    <div class="mirror__slide">
+                        <div class="show-img__block">
+                            <img src="{{ value_mirror.image }}" alt="" class="show-img">
                         </div>
-                        <div class="mirror__nav">
-                            {% for key_mirror, value_mirror in context.mirrors.items %}
-                            <div class="mirror__nav__item" data-id="{{ forloop.counter0 }}">
-                                <img src="{{ value_mirror.image }}" alt="" class="mirror__nav__item-img">
+                        <div class="show__description">
+                            <p class="description__title">{{ value_mirror.name }}</p>
+                            <div class="description__item-block">
+                                <p class="description__item">Размер: <span
+                                        class="show-dark">{{value_mirror.size}}</span></p>
+                                <p class="description__item">Подсветка: <span
+                                        class="show-dark">{{value_mirror.back_light}}</span>
+                                </p>
+                                <p class="description__item">Основа: <span
+                                        class="show-dark">{{value_mirror.basis}}</span>
+                                </p>
                             </div>
-                            {% endfor %}
+                            <a href="{{ value_mirror.mirror_url }}" class="show-btn__link">
+                                <div class="show__btn btn">Перейти к зеркалу</div>
+                            </a>
                         </div>
-                        <a href="" class="show-btn__link show-btn-mobile">
-                            <div class="show__btn">Заказать</div>
-                        </a>
                     </div>
+                    {% endfor %}
                 </div>
-            </div>
-            <div class="projects">
-
-                {% for key_project, project in context.text_for_page.projects.items %}
-                <div class="projects__image-show is{{ forloop.counter }}">
-                    <div class="image-show__close"></div>
-                    <div class="image-show__slider">
-                        {% for key_image, image in project.project_images.items %}
-                        <div class="image-show__slide">
-                            <img data-id="is{{ forloop.counter }}" src="{{ image.image_url }}" alt="" class="image-show__img">
-                        </div>
-                        {% endfor %}
+                <div class="mirror__nav">
+                    {% for key_mirror, value_mirror in context.mirrors.items %}
+                    <div class="mirror__nav__item" data-id="{{ forloop.counter0 }}">
+                        <img src="{{ value_mirror.image }}" alt="" class="mirror__nav__item-img">
                     </div>
+                    {% endfor %}
+                </div>
+                <a href="" class="show-btn__link show-btn-mobile">
+                    <div class="show__btn btn">Заказать</div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div id="projects" class="projects">
+
+        {% for key_project, project in context.text_for_page.projects.items %}
+        <div class="projects__image-show is{{ forloop.counter }}">
+            <div class="image-show__close"></div>
+            <div class="image-show__slider">
+                {% for key_image, image in project.project_images.items %}
+                <div class="image-show__slide">
+                    <img data-id="is{{ forloop.counter }}" src="{{ image.image_url }}" alt="" class="image-show__img">
                 </div>
                 {% endfor %}
-                <div class="container">
-                    <hr class="line line-dark">
-                    <div class="title title-dark">{{ context.text_for_page.block_titles.project_titles_block }}</div>
-                    <div class="projects__block">
-                        <div class="projects__slider">
-                            {% for key_project, project in context.text_for_page.projects.items %}
-                            <div class="projects__slide">
-                                <div class="projects-slide__images">
-                                    {% for key_image, image in project.project_images.items %}
-                                    <img data-id="is{{ forloop.counter }}" src="{{ image.image_url }}" alt="" class="projects__img">
-                                    {% endfor %}
-                                </div>
-                                <p class="projects-slide__title">{{ project.name_project }}
-                                </p>
-                                <p class="projects-slide__subtitle">{{ project.city }}.</p>
-
-                            </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="container">
+            <hr class="line line-dark">
+            <div class="title title-dark">{{ context.text_for_page.block_titles.project_titles_block }}</div>
+            <div class="projects__block">
+                <div class="projects__slider">
+                    {% for key_project, project in context.text_for_page.projects.items %}
+                    <div class="projects__slide">
+                        <div class="projects-slide__images">
+                            {% for key_image, image in project.project_images.items %}
+                            <img data-id="is{{ forloop.counter }}" src="{{ image.image_url }}" alt=""
+                                class="projects__img">
                             {% endfor %}
                         </div>
+                        <p class="projects-slide__title">{{ project.name_project }}
+                        </p>
+                        <p class="projects-slide__subtitle">{{ project.city }}.</p>
+
                     </div>
+                    {% endfor %}
                 </div>
             </div>
-            <div class="often-questions">
-                <div class="container">
-                    <hr class="line line-white">
-                    <p class="title title-white">{{ context.text_for_page.block_titles.faq_titles_block }}</p>
-                    <div class="often-questions__block">
-                        {% for FAQ_key, FAQ in context.text_for_page.FAQ.items %}
-                        <div class="question">
-                            <hr class="line line-white line-question">
-                            <div class="questions__item">
-                                <div class="question__description">
-                                    <p class="question__num">{{ forloop.counter }}.</p>
-                                    <p class="question__title">{{ FAQ.FAQ_name }}</p>
-                                </div>
-                                <div class="question__arrow"></div>
-                            </div>
-                            <div class="question__txt">
-                                {{ FAQ.FAQ_answer }}
-                            </div>
-                            <!-- <div class="question__txt">
+        </div>
+    </div>
+    <div id="often-questions" class="often-questions">
+        <div class="container">
+            <hr class="line line-white">
+            <p class="title title-white">{{ context.text_for_page.block_titles.faq_titles_block }}</p>
+            <div class="often-questions__block">
+                {% for FAQ_key, FAQ in context.text_for_page.FAQ.items %}
+                <div class="question">
+                    <hr class="line line-white line-question">
+                    <div class="questions__item">
+                        <div class="question__description">
+                            <p class="question__num">{{ forloop.counter }}.</p>
+                            <p class="question__title">{{ FAQ.FAQ_name }}</p>
+                        </div>
+                        <div class="question__arrow"></div>
+                    </div>
+                    <div class="question__txt">
+                        {{ FAQ.FAQ_answer }}
+                    </div>
+                    {% if forloop.last %}
+                    <hr class="line line-white line-question-last">{% endif %}
+                    <!-- <div class="question__txt">
                                 Доставка зеркал и в пределах Красноярска при заказе от <span
                                     class="question-txt__bold">30000 рублей</span> осуществляется
                                 бесплатно.
@@ -115,61 +121,68 @@
                                 любой другой по выбору заказчика). В обязательном порядке используется упаковка
                                 повышенной жесткости для предотвращения нанесения урона зеркалу в момент
                                 транспортировки.
+                                <hr class="line line-white line-question-last">
                             </div> -->
-                        </div>
-                        {% endfor %}
-                    </div>
                 </div>
+                {% endfor %}
             </div>
+        </div>
+    </div>
 
-            <div class="parallax__fixed">
-                <div class="parallax__block">
-                    <hr class="line line-dark txt-fixed">
-                    <div class="title title-dark txt-fixed">{{ context.text_for_page.block_titles.development_process_titles_block }}</div>
-                    <div class="horizontal-scroll__wrapper">
-                        {% for step_key, step in context.text_for_page.development_process.items %}
-                        <div class="img__wrapper">
-                            <div class="img__block">
-                                <img class="parallax__img" src="{{ step.step_image }}" alt="">
-                                <img class="parallax__arrow" src="img/parallax__arrow.svg" alt="">
-                            </div>
-                            <p class="img-wrapper__title">{{ forloop.counter }}</p>
-                            <p class="img-wrapper__subtitle">{{ step.step_text }}</p>
-                        </div>
-                        {% endfor %}
+    <div id="parallax__fixed" class="parallax__fixed">
+        <div class="parallax__block">
+            <hr class="line line-dark txt-fixed">
+            <div class="title title-dark txt-fixed">
+                {{context.text_for_page.block_titles.development_process_titles_block }}</div>
+            <div class="horizontal-scroll__wrapper">
+                {% for step_key, step in context.text_for_page.development_process.items %}
+                <div class="img__wrapper">
+                    <div class="img__block">
+                        <img class="parallax__img" src="{{ step.step_image }}" alt="">
+                        <img class="parallax__arrow" src="img/parallax__arrow.svg" alt="">
                     </div>
+                    <p class="img-wrapper__title">{{ forloop.counter }}</p>
+                    <p class="img-wrapper__subtitle">{{ step.step_text }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="parallax-status">
+                <div class="status__bkg">
+                    <div class="status__line"></div>
                 </div>
             </div>
-            <div class="contact-us">
-                <div class="container">
-                    <hr class="line line-white">
-                    <div class="title title-white">{{ context.text_for_page.block_titles.contact_us_titles_block }}</div>
-                    <div class="contact-us__block">
-                        <form action="" method="post">
-                            {% csrf_token %}
-                            <div class="form__item">
-                                <!--<label for="{{ form.name.id_for_label }}"></label>-->
-                                <!--<input placeholder="Имя" type="text" class="form__input" name="name">-->
-                                {{ context.form.name }}
-                            </div>
-                            <div class="form__item">
-                                {{ context.form.phone_number }}
-                            </div>
-                            <div class="form__item">
-                                {{ context.form.city }}
-                            </div>
-                            <div class="form__item">
-                                {{ context.form.user_email }}
-                            </div>
-                                <div class="form-textare__block">
-                                    <p class="form__title">Ваш комментарий</p>
-                               {{ context.form.comment }}
-                            </div>
-                            <button type="submit" class="contact-us__btn">Оставить заявку</button>
-                        </form>
+        </div>
+    </div>
+    <div id="contact-us" class="contact-us">
+        <div class="container">
+            <hr class="line line-white">
+            <div class="title title-white">{{ context.text_for_page.block_titles.contact_us_titles_block }}</div>
+            <div class="contact-us__block">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="form__item">
+                        <!--<label for="{{ form.name.id_for_label }}"></label>-->
+                        <!--<input placeholder="Имя" type="text" class="form__input" name="name">-->
+                        {{ context.form.name }}
                     </div>
-                </div>
+                    <div class="form__item">
+                        {{ context.form.phone_number }}
+                    </div>
+                    <div class="form__item">
+                        {{ context.form.city }}
+                    </div>
+                    <div class="form__item">
+                        {{ context.form.user_email }}
+                    </div>
+                    <div class="form-textare__block">
+                        <p class="form__title">Ваш комментарий</p>
+                        {{ context.form.comment }}
+                    </div>
+                    <button type="submit" class="contact-us__btn btn">Оставить заявку</button>
+                </form>
             </div>
+        </div>
+    </div>
 
-        </main>
+</main>
 {% endblock %}

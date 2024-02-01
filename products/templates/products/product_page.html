@@ -2,59 +2,62 @@
 {% load static %}
 
 {% block content %}
-    <main class="main main-goods">
-            <div class="container">
-                <div class="product__block">
-                    <div class="product__show">
-                        <div class="product__slide__block">
-                            {% for image in context.mirror.images %}
-                            <div class="product__slide">
-                                <img src="{{ image.image.url }}" alt="" class="product-slide__img">
-                            </div>
-                            {% endfor %}
-                        </div>
-                        <div class="product__subslide__block">
-                            {% for image in context.mirror.images %}
-                            <div class="product__subslide">
-                                <img src="{{ image.image.url }}" alt="" class="product-subslide__img">
-                            </div>
-                            {% endfor %}
-                        </div>
+<main class="main main-goods">
+    <div class="container">
+        <div class="product__block">
+            <div class="product__show">
+                <div class="product__slide__block">
+                    {% for image in context.mirror.images %}
+                    <div class="product__slide">
+                        <img src="{{ image.image.url }}" alt="" class="product-slide__img">
                     </div>
-                    <div class="product__description__block">
-                        <div class="product__title">
-                            <p class="product__name">{{ context.mirror.product.name }}</p>
-                            <div class="product__price">{{ context.mirror.cost }} ₽</div>
-                        </div>
-                        <div class="product__description">
-                            <p class="description__main">{{ context.mirror.product.description }}</p>
-                            <p class="description__characteristic">
-                                <span class="characteristic-dark">Размер: </span>{{ context.mirror.size }}
-                            </p>
-                            <p class="description__characteristic">
-                                <span class="characteristic-dark">Зеркало: </span>серебро
-                            </p>
+                    {% endfor %}
+                </div>
+                <div class="product__subslide__block">
+                    {% for image in context.mirror.images %}
+                    <div class="product__subslide">
+                        <img src="{{ image.image.url }}" alt="" class="product-subslide__img">
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="product__description__block">
+                <div class="product__title">
+                    <p class="product__name">{{ context.mirror.product.name }}</p>
+                    <div class="product__price">{{ context.mirror.cost }} ₽</div>
+                </div>
+                <div class="product__description">
+                    <p class="description__main">{{ context.mirror.product.description }}</p>
+                    <p class="description__characteristic">
+                        <span class="characteristic-dark">Размер: </span>{{ context.mirror.size }}
+                    </p>
+                    <p class="description__characteristic">
+                        <span class="characteristic-dark">Зеркало: </span>серебро
+                    </p>
 
-                            <p class="description__characteristic">
-                                <span class="characteristic-dark">Подсветка: </span>{{ context.mirror.back_light }}
-                            </p>
-                            <p class="description__characteristic">
-                                <span class="characteristic-dark">Основа: </span>{{ context.mirror.basis }}
-                            </p>
-                        </div>
-                        <div class="product__buy">
-                            <p class="buy__annotation">Количество:</p>
-                            <div class="buy__block">
-                                <div class="buy__count">
-                                    <div class="count-minus">-</div>
-                                    <div class="count">1</div>
-                                    <div class="count-plus">+</div>
-                                </div>
-                                <div class="buy__btn">Добавить в корзину</div>
-                            </div>
-                        </div>
+                    <p class="description__characteristic">
+                        <span class="characteristic-dark">Подсветка: </span>{{ context.mirror.back_light }}
+                    </p>
+                    <p class="description__characteristic">
+                        <span class="characteristic-dark">Основа: </span>{{ context.mirror.basis }}
+                    </p>
+                </div>
+                <div class="product__buy">
+                    <p class="buy__annotation">Количество:</p>
+                    <div class="buy__block">
+                        <!-- <div class="buy__count">
+                            <div class="count-minus">-</div>
+                            <div class="count">1</div>
+                            <div class="count-plus">+</div>
+                        </div> -->
+                        <form action="{% url 'orders:add' product_id=context.mirror.product.id%}" method="post">
+                            {%csrf_token %}
+                            <button class="buy__btn btn btn-dark">Добавить в корзину</button>
+                        </form>
                     </div>
                 </div>
             </div>
-        </main>
+        </div>
+    </div>
+</main>
 {% endblock %}
