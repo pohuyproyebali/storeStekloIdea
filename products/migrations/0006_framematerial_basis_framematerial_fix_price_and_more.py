@@ -14,25 +14,25 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='framematerial',
             name='basis',
-            field=models.ForeignKey(default=0, on_delete=django.db.models.deletion.CASCADE, to='products.basis'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.basis'),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='framematerial',
             name='fix_price',
-            field=models.FloatField(default=0),
+            field=models.FloatField(),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='framematerial',
             name='price_of_consumables',
-            field=models.DecimalField(decimal_places=5, default=0, max_digits=10),
+            field=models.DecimalField(decimal_places=5, max_digits=10),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='framematerial',
             name='size_price',
-            field=models.FloatField(default=0),
+            field=models.FloatField(),
             preserve_default=False,
         ),
     ]

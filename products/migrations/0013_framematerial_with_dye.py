@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='framematerial',
             name='with_dye',
-            field=models.BooleanField(default=0),
+            field=models.BooleanField(),
             preserve_default=False,
         ),
     ]

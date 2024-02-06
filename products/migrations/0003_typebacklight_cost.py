@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='typebacklight',
             name='cost',
-            field=models.DecimalField(decimal_places=2, default=0, max_digits=5),
+            field=models.DecimalField(decimal_places=2, max_digits=5),
         ),
     ]

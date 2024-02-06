@@ -17,19 +17,19 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='framematerial',
             name='material_price',
-            field=models.DecimalField(decimal_places=5, default=0, max_digits=10),
+            field=models.DecimalField(decimal_places=5, max_digits=10),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='framematerial',
             name='price_work_less',
-            field=models.DecimalField(decimal_places=5, default=0, max_digits=10),
+            field=models.DecimalField(decimal_places=5, max_digits=10),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='framematerial',
             name='price_work_more',
-            field=models.DecimalField(decimal_places=5, default=0, max_digits=10),
+            field=models.DecimalField(decimal_places=5, max_digits=10),
             preserve_default=False,
         ),
     ]

@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='framematerial',
             name='fixe_price',
-            field=models.BooleanField(default=0),
+            field=models.BooleanField(),
             preserve_default=False,
         ),
     ]
