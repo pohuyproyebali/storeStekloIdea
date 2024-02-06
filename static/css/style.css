@@ -359,7 +359,7 @@ body::-webkit-scrollbar-thumb {
 
 .header__burger.main__active {
     position: fixed;
-    right: 96px;
+    right: 103px;
 }
 
 .header__burger__block {
