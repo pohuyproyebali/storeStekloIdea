@@ -152,6 +152,10 @@ body::-webkit-scrollbar-thumb {
     color: rgba(255, 255, 255, 0.80);
 }
 
+.d-none {
+    display: none;
+}
+
 .cross {
     transition: all 0.3s ease;
 }
@@ -355,7 +359,7 @@ body::-webkit-scrollbar-thumb {
 
 .header__burger.main__active {
     position: fixed;
-    right: 96px;
+    right: 103px;
 }
 
 .header__burger__block {
@@ -1109,8 +1113,9 @@ body::-webkit-scrollbar-thumb {
     margin: 150px 0 0 0;
     padding: 0 120px;
     display: flex;
-    width: max-content;
 }
+
+
 
 
 .img__block {
@@ -1169,13 +1174,13 @@ body::-webkit-scrollbar-thumb {
 }
 
 .horizontal-scroll__wrapper::-webkit-scrollbar {
-    width: 3px;
+    height: 2px;
     /* ширина scrollbar */
 }
 
 .horizontal-scroll__wrapper::-webkit-scrollbar-track {
     background: rgba(72, 72, 72, 0.30);
-    margin: 120px 0;
+    width: 100vw;
     /* цвет дорожки */
 }
 
@@ -1726,8 +1731,10 @@ body::-webkit-scrollbar-thumb {
 
 @media (max-width: 514px) {
     .horizontal-scroll__wrapper {
-        padding: 0 15px;
+        padding: 0 15px 30px 15px;
         margin: 100px 0 0 0;
+        width: 100%;
+        overflow-x: scroll;
     }
 
     .parallax__fixed {
@@ -1755,11 +1762,6 @@ body::-webkit-scrollbar-thumb {
         margin: 20px 0 0 0;
         font-size: 36px;
         padding: 0;
-    }
-
-
-    .img-wrapper__last {
-        margin: 43px 0 0 0;
     }
 
     .img-wrapper__subtitle {
