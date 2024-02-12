@@ -38,7 +38,7 @@ def order_form_create(request, main_page=False):
         form.update_style(main_page)
         if form.is_valid():
             just_created_order = form.save()
-            if request.session['basket']:
+            if request.session.get('basket', None):
                 for product in request.session['basket']:
                     ProductToOrders.objects.create(
                         order=just_created_order, product=Product.objects.get(id=product['id'])
