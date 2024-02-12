@@ -90,12 +90,13 @@ class FrameMirrorToProduct(models.Model):
 
 # Тип подсветка
 class TypeBacklight(models.Model):
+    name_for_admin = models.CharField(max_length=128, unique=True)
     name = models.CharField(max_length=128, unique=True)
     cost = models.IntegerField()
     quantityBlocks = models.IntegerField()
 
     def __str__(self):
-        return f'{self.name} | {self.quantityBlocks}'
+        return f'{self.name_for_admin} | {self.quantityBlocks}'
 
 
 # Наличие подсветки у зеркала
