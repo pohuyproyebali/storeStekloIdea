@@ -58,10 +58,12 @@ class ProductsAdmin(admin.ModelAdmin):
                                                    / max((plywood_basis.plywood_length,
                                                           plywood_basis.plywood_width)))) * plywood_basis.price)
                 costProduct += float(plywood_basis.cutting) * P  # Резка
-                costProduct += 600  # Расходники
+                #costProduct += 600  # Расходники !!!убрать!!!
+                #Кромка
             if not BacklightToProduct.objects.filter(product=product.id).exists():
                 costProduct += 4000 if S < 2 else 5000 if S < 3 else 6000
         if BacklightToProduct.objects.filter(product=product.id).exists():
+            #Добавить рассеиватель
             backLight = \
                 TypeBacklight.objects.filter(
                     id=BacklightToProduct.objects.filter(product=product.id)[0].typeBackLight.id)[
@@ -80,7 +82,7 @@ class ProductsAdmin(admin.ModelAdmin):
                     0]
             costProduct += math.ceil(P / frame_material.size_price) * float(frame_material.material_price)  # Материал
             if frame_material.with_dye:
-                costProduct += 300 if P < 2 else 600 if P < 3 else 1000
+                costProduct += 300 if P < 2 else 600 if P < 3 else 1000  # Краска
             costProduct += float(frame_material.price_work_less) if S < 1 else float(
                 frame_material.price_work_more)  # Работа
             costProduct += float(frame_material.consumables_price)  # Расходники
@@ -92,6 +94,7 @@ class ProductsAdmin(admin.ModelAdmin):
         costProduct += 1200  # Доставка
         costProduct += 1000  # Транспорт
         costProduct *= 1.18
+        costProduct = round(costProduct, -2)
         return f'{costProduct}'
 
 

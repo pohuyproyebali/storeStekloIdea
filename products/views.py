@@ -11,14 +11,22 @@ import math
 
 # Create your views here.
 
-def goods(request):
+def goods(request, sort_pk=None):
     form = order_form_create(request)
+    sort_name = 'сначала популярные'
     data = [{
         "product": i,
         "cost": math.ceil(float(cost(product=i))),
         "image": ImageToProduct.objects.get(product=i.id, firstPhoto=True)
     } for i in Product.objects.filter(is_published=True)]
+    if sort_pk == 1:
+        data = sorted(data, key=lambda item: int(item['cost']))
+        sort_name = 'сначала дешевые'
+    elif sort_pk == 2:
+        data = sorted(data, key=lambda item: int(item['cost']), reverse=True)
+        sort_name = 'сначала дорогие'
     context = {
+        'sort_name': sort_name,
         'info_for_page': info_for_page,
         'basket':
             {
@@ -85,7 +93,7 @@ def cost(product: Product, size: SizeToProduct = None):
                                                 / max((plywood_basis.plywood_length,
                                                        plywood_basis.plywood_width)))) * plywood_basis.price)
             cost_product += float(plywood_basis.cutting) * P  # Резка
-            cost_product += 600  # Расходники
+            #cost_product += 600  # Расходники
         if not BacklightToProduct.objects.filter(product=product.id).exists():
             cost_product += 4000 if S < 2 else 5000 if S < 3 else 6000
     if BacklightToProduct.objects.filter(product=product.id).exists():
@@ -117,4 +125,5 @@ def cost(product: Product, size: SizeToProduct = None):
     cost_product += 1200  # Доставка
     cost_product += 1000  # Транспорт
     cost_product *= 1.18
+    cost_product = round(cost_product, -2)
     return f'{cost_product}'

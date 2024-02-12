@@ -253,6 +253,87 @@ body::-webkit-scrollbar-thumb {
 
 }
 
+.up__btn {
+    z-index: 1000;
+    cursor: pointer;
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    right: 15px;
+    bottom: 50px;
+    opacity: 0;
+    border-radius: 50%;
+    height: 78px;
+    width: 78px;
+    background: #484848;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+}
+
+.up__arrow {
+    transition: all 0.3s ease;
+}
+
+.up__btn:hover {
+    background: #FFF;
+}
+
+.up__btn:hover .up__arrow {
+    fill: #484848;
+}
+
+.up__btn.fixed {
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+.header__nav-block.fixed {
+    position: fixed;
+    background: #FFF;
+    box-shadow: 0px 0px 12.4px 0px rgba(0, 0, 0, 0.25);
+    color: #484848;
+    width: 100%;
+    padding: 30px 103px;
+    top: 0;
+    transition: all 0.3s ease;
+    left: 0;
+    z-index: 1000;
+}
+
+
+@media (max-width: 1740px) {
+    .header__nav-block.fixed {
+        padding: 30px 15px;
+    }
+}
+
+.header__nav-block.fixed .header__logo {
+    color: #484848;
+    text-shadow: none;
+}
+
+.header__nav-block.fixed .nav__item {
+    color: #484848;
+}
+
+.header__nav-block.fixed .header__burger:before {
+    background: #484848;
+}
+
+.header__nav-block.fixed .header__burger:after,
+.header__burger span {
+    background: #484848;
+}
+
+.header__nav-block.fixed .header__burger span {
+    background: #484848;
+}
+
+.header__nav-block.fixed .header__burger__block {
+    padding: 20px 40px 42px 40px;
+}
+
 .header__nav-block {
     display: flex;
     justify-content: space-between;
@@ -528,7 +609,7 @@ body::-webkit-scrollbar-thumb {
     }
 
     .header__promo {
-        margin: 156px 0 0 0;
+        margin: 125px 0 0 0;
     }
 
     .header__logo {
@@ -543,12 +624,17 @@ body::-webkit-scrollbar-thumb {
     }
 
     .header {
-        height: 711px;
+        padding: 0 0 375px 0;
     }
 
     .header__block {
         background: url(../img/header_bkg-m.svg) center no-repeat;
         background-position: top;
+    }
+
+    .header__burger.main__active {
+        right: 40px;
+        top: 65px;
     }
 }
 
@@ -560,10 +646,11 @@ body::-webkit-scrollbar-thumb {
         right: 0;
     }
 
-    .header__burger.main__active {
-        right: 40px;
-        top: 65px;
+    .header__nav-block.fixed .header__burger__block {
+        padding: 42px 40px;
     }
+
+
 }
 
 @media (max-width: 500px) {
