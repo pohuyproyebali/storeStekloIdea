@@ -90,7 +90,7 @@ class FrameMirrorToProduct(models.Model):
 
 # Тип подсветка
 class TypeBacklight(models.Model):
-    name_for_admin = models.CharField(max_length=128, unique=True)
+    name_for_admin = models.CharField(max_length=128)
     name = models.CharField(max_length=128, unique=True)
     cost = models.IntegerField()
     quantityBlocks = models.IntegerField()
