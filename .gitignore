@@ -1,5 +1,5 @@
 __pycache__/
-settings.py
+storeStekloIdea/settings.py
 db.sqlite3
 media
 .env

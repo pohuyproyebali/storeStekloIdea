@@ -27,9 +27,9 @@ environ.Env.read_env(env_file=os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['stekloidea.ru', 'www.stekloidea.ru']
 
 
 # Application definition
@@ -84,9 +84,9 @@ WSGI_APPLICATION = 'storeStekloIdea.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'stekloidea',
-        'USER': 'root',
-        'PASSWORD': 'Aboba_228',
+        'NAME': 'u2446565_django',
+        'USER': 'u2446565_default',
+        'PASSWORD': 'U8Oa9GfgnvMw34gR',
         'HOST': 'localhost'
     }
 }
@@ -126,10 +126,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [
+STATIC_URL = '/static/'
+STATIC_ROOT= BASE_DIR / 'static'
+'''STATICFILES_DIRS = [
     BASE_DIR / 'static'
-]
+]'''
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
