@@ -83,7 +83,7 @@ def main_page(request):
                     'step_text': step['text'],
                     'step_image': ImageToText.objects.get(
                         for_text=step['id']
-                    ).image.url if ImageToText.objects.filter(for_text=step['id']).exists() else 'aboba'
+                    ).image.url if ImageToText.objects.filter(for_text=step['id']).exists() else None
                 } for step in development_process_steps
             }
         },

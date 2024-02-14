@@ -140,7 +140,7 @@
                 <div class="img__wrapper">
                     <div class="img__block">
                         <img class="parallax__img" src="{{ step.step_image }}" alt="">
-                        <img class="parallax__arrow" src="img/parallax__arrow.svg" alt="">
+                        <img class="parallax__arrow" src="{% static 'img/parallax__arrow.svg' %}" alt="">
                     </div>
                     <p class="img-wrapper__title">{{ forloop.counter }}</p>
                     <p class="img-wrapper__subtitle">{{ step.step_text }}</p>
