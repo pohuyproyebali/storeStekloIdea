@@ -13,7 +13,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-    <link rel="icon" href="">
+    <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'img/favicon.svg' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static '/css/style.css' %}">
     <title>{{ context.info_for_page.logo }}</title>
 </head>
@@ -31,6 +32,9 @@
                         <div class="header__nav">
                             <a class="nav__link" href="{% url 'main_page' %}">
                                 <p class="nav__item nav__item-goods">Главная</p>
+                            </a>
+                            <a class="nav__link" href="{% url 'goods' %}">
+                                <p class="nav__item nav__item-goods">Каталог</p>
                             </a>
                             <div class="nav__link cart__link__block">
                                 <div class="cart__link"></div>

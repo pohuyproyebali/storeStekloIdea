@@ -56,7 +56,7 @@ def mirror_page(request, slug_id):
                 TypeBacklight.objects.get(id=BacklightToProduct.objects.get(product=mirror.id).typeBackLight.id).name if
                 BacklightToProduct.objects.filter(product=mirror.id).exists() else "нет"
             ).lower(),
-            "basis": "фанера" if PlywoodBasisToProduct.objects.filter(
+            "basis": "дерево" if PlywoodBasisToProduct.objects.filter(
                 product=mirror.id).exists() else "алюминевый профиль"
         },
         'info_for_page': info_for_page,
