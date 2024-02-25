@@ -33,7 +33,7 @@ def main_page(request):
             {
                 mirror.name: {
                     'name': mirror.name,
-                    'size': SizeToProduct.objects.get(product=mirror.id, initially=True).size,
+                    'size': Product.product_manager.minimal_size(product=mirror.id).size,
                     'basis': "фанера" if PlywoodBasisToProduct.objects.filter(product=mirror.id).exists()
                     else "алюминевый профиль",
                     "back_light": (
