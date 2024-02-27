@@ -38,8 +38,6 @@ def goods(request, sort_pk=None):
                         float(
                             Product.product_manager.cost(
                                 product=Product.objects.get(id=product['id']),
-                                size=Product.product_manager.all_size(
-                                    product=Product.objects.get(id=product['id']))[product['size']]
                             )
                         )
                     )
@@ -85,7 +83,9 @@ def mirror_page(request, slug_id, size_id=None):
                             Product.product_manager.cost(
                                 product=Product.objects.get(id=product['id']),
                                 size=Product.product_manager.all_size(
-                                    product=Product.objects.get(id=product['id']))[product['size']]
+                                    product=Product.objects.get(
+                                        id=product['id']
+                                    ))[product['size']] if product['size'] is int else None
                             )
                         )
                     )
