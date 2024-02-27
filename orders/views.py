@@ -8,7 +8,7 @@ def basket_list(request):
     return redirect(request.POST.get('url_form'))
 
 
-def add_to_basket(request, product_id):
+def add_to_basket(request, product_id, size_id=None):
     if request.method == 'POST':
         if not request.session.get('basket'):
             request.session['basket'] = list()
@@ -18,9 +18,11 @@ def add_to_basket(request, product_id):
         basket_ids_list = list()
         for item in request.session['basket']:
             basket_ids_list.append(item['id'])
+            basket_ids_list.append(item['size'])
 
         app_data = {
             'id': product_id,
+            'size': size_id,
         }
 
         request.session['basket'].append(app_data)

@@ -6,49 +6,6 @@
     <div class="container">
         <p class="title title-dark">Каталог</p>
         <div class="catalog__block">
-            <!-- <div class="sort-goods__block">
-                        <div class="sort-goods__list">
-                            <div class="sort-goods__item">
-                                <div class="sort-arrow"></div>
-                                <p class="sort__name">Размер</p>
-                            </div>
-                            <div class="sort-goods__content">
-                                <div class="content__item">
-                                    <input id="size__checkbox-1" name="size__checkbox" class="content__checkbox"
-                                        type="checkbox">
-                                    <label for="size__checkbox-1">
-                                        <p class="content__name">100x100</p>
-                                    </label>
-                                </div>
-                                <div class="content__item">
-                                    <input id="size__checkbox-2" name="size__checkbox" class="content__checkbox"
-                                        type="checkbox">
-                                    <label for="size__checkbox-2">
-                                        <p class="content__name">100x100</p>
-                                    </label>
-                                </div>
-                                <div class="content__item">
-                                    <input id="size__checkbox-3" name="size__checkbox" class="content__checkbox"
-                                        type="checkbox">
-                                    <label for="size__checkbox-3">
-                                        <p class="content__name">100x100</p>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="sort-goods__item">
-                                <div class="sort-arrow"></div>
-                                <p class="sort__name">Цена</p>
-                            </div>
-                            <div class="sort-goods__content">
-                                <div class="content__item">
-                                    <input class="price__input" placeholder="от 2 200 ₽" type="text" name="" id="">
-                                    <input class="price__input" placeholder="до 52 500 ₽" type="text" name="" id="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="sort__btn apply-btn">Применить</div>
-                        <div class="sort__btn reset-btn">Сбросить</div>
-                    </div> -->
             <div class="goods">
                 <div class="goods__sort">
                     <p class="goods__sort-title">Сортировка:</p>
@@ -103,7 +60,7 @@
                             <a href="{{ mirror.product.get_absolute_url }}">
                                 <p class="buy__cost">от {{ product.cost }} ₽</p>
                             </a>
-                            <form action="{% url 'orders:add' product_id=product.product.id%}" method="post">
+                            <form action="{% url 'orders:add' product_id=product.product.id %}" method="post">
                                 {%csrf_token %}
                                 <button type="submit" class="cart">
                                     <p class="cart__txt-mobile">Корзина</p>

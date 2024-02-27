@@ -36,7 +36,9 @@ window.onload = function () {
             centerMode: false,
             dots: false,
             variableWidth: true,
-            focusOnSelect: true
+            focusOnSelect: true,
+            slidesToShow: 4,
+            slidesToScroll: 4,
         });
 
         $('.mirror-show').slick({
@@ -204,6 +206,16 @@ window.onload = function () {
             $(this).find('.question__txt').toggleClass('active').slideToggle(300, 'linear');
             $(this).find('.question__arrow').toggleClass('active');
         });
+        $('.characteristic__choose').click(function (event) {
+            $(this).find('.choose__list').slideToggle(100, 'linear');
+        });
+
+        $('.choose__var').click(function (event) {
+            $chooseText = $(this).text()
+            $(this).parent().siblings('.choose__var-show').text($chooseText)
+        });
+
+
 
         $('.goods__sort__radio').click(function (event) {
 
@@ -276,13 +288,13 @@ window.onload = function () {
         $(window).scroll(function (event) {
             var st = $(this).scrollTop();
             if (st > lastScrollTop) {
-
-                scrollDirection = 0;
+                scrollDirection = 0; // вниз
             } else {
-                scrollDirection = 1;
+                scrollDirection = 1; // вверх
             }
             lastScrollTop = st;
         });
+        // Данная функция проверяет вверх или вниз листает пользователь
 
         $(function () {
             if ($(window).width() > 514) {
@@ -290,18 +302,16 @@ window.onload = function () {
                 scrollDirection = 0;
 
                 $muchElements = $('.img__wrapper').length;
-
                 $('.img__wrapper').last().addClass('img__wrapper-last')
-
 
                 $nav = $('.parallax__block');
                 $scrollBlock = $('.horizontal-scroll__wrapper');
                 $fixedWidth = $nav.outerWidth();
 
-                $scrollTotalWidth = $('.img__wrapper').width() * ($muchElements - 1) + $('.img__wrapper-last').width() + 180;
+                $scrollTotalWidth = $('.img__wrapper').width() * ($muchElements - 1) + $('.img__wrapper-last').width() + 240;
+                // высчитываем максимальную ширину скролла блока
 
                 $koefScroll = 100 / ($scrollTotalWidth / 100)
-
                 $koefWidth = 100 / ($scrollTotalWidth / $nav.width())
                 $parallaxStatusBkg = $('.status__bkg').width();
                 $statusLineWidth = $parallaxStatusBkg / 100 * $koefWidth
@@ -310,11 +320,8 @@ window.onload = function () {
                     width: '' + $statusLineWidth + 'px',
                 });
 
-
                 $window = $(window);
-
                 $windowBottom = $window.height();
-
                 $window.scroll(function () {
                     if ($nav.hasClass('fixed') == false) {
                         $h = $nav.offset().top;
@@ -322,10 +329,9 @@ window.onload = function () {
 
                     $scrollUp = $nav.offset().top;
                     $muchLeft = ($scrollTotalWidth - $window.width()) / $muchElements;
-                    $muchPadding = $muchLeft + 100;
                     $parallaxFixed = $('.parallax__fixed');
-                    $parallaxFixed.css('padding-bottom', $muchPadding * $muchElements + 'px')
-
+                    $parallaxFixed.css('padding-bottom', $scrollTotalWidth - 917 + 'px')
+                    // делаем отступ для родителя блока скролла
 
                     if (scrollDirection == 1 && $window.scrollTop() + $nav.height() + 200 < $scrollUp + 200 + $nav.height()) {
                         scrollActive = true
@@ -334,8 +340,8 @@ window.onload = function () {
                         });
                         $h = $nav.offset().top;
                     }
-                    if (scrollActive) {
 
+                    if (scrollActive) {
                         var scrollMuch = $window.scrollTop() - $h;
                         $koefScrollLine = ($parallaxStatusBkg / 100) * $koefScroll
                         $scrollMuchKoef = (100 / ($koefScrollLine / 100)) / 100
@@ -345,6 +351,7 @@ window.onload = function () {
                             $scrollBlock.css({
                                 transform: 'translateX(-' + scrollMuch + 'px)'
                             });
+                            // это добавляет непосредственно прокрутку
 
                             if ($scrollMuchLine + $statusLineWidth < $parallaxStatusBkg) {
                                 $('.status__line').css({
@@ -360,15 +367,13 @@ window.onload = function () {
                             $nav.removeClass('fixed');
                         }
 
-
-                        $muchScrollBottom = $muchPadding * $muchElements - 1000
-
+                        $muchScrollBottom = $scrollTotalWidth - 917 - 1000
                         if (scrollMuch > $muchLeft * $muchElements && scrollDirection == 0) {
                             $nav.removeClass('fixed');
                             $nav.css({
                                 transform: 'translateY(' + $muchScrollBottom + 'px)'
                             });
-
+                            // после того как блок опускается до нужной отметки делаем ему отступ сверху
                             scrollActive = false;
                         }
                     }
