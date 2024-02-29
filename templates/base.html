@@ -61,7 +61,7 @@
                                 <div class="cart-item__title">{{ product_value.name }}</div>
 
                                 <form class="cart-item__close-form"
-                                    action="{% url 'orders:remove' product_id=product_value.product.id%}" method="post">
+                                    action="{% url 'orders:remove' product_id=product_value.product.id id_of_many=product_value.id_of_many %}" method="post">
                                     {% csrf_token %}
                                     <button type="submit" class="cart-item__close cross"></button>
                                 </form>
@@ -102,7 +102,8 @@
                 </div>
             </div>
             <div class="up__btn">
-                <svg width="30" height="35" viewBox="0 0 30 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="up-arrow__block" width="30" height="35" viewBox="0 0 30 35" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
                     <path class="up__arrow"
                         d="M13 33C13 34.1046 13.8954 35 15 35C16.1046 35 17 34.1046 17 33L13 33ZM16.4142 0.585785C15.6332 -0.195263 14.3668 -0.195263 13.5858 0.585785L0.857865 13.3137C0.0768164 14.0948 0.0768164 15.3611 0.857865 16.1421C1.63891 16.9232 2.90524 16.9232 3.68629 16.1421L15 4.82843L26.3137 16.1421C27.0948 16.9232 28.3611 16.9232 29.1421 16.1421C29.9232 15.3611 29.9232 14.0948 29.1421 13.3137L16.4142 0.585785ZM17 33L17 2L13 2L13 33L17 33Z"
                         fill="white" fill-opacity="0.8" />
@@ -196,7 +197,7 @@
                         <div class="footer__contacts">
                             <p class="footer__title">Россия</p>
                             <p class="footer-contacts__item">{{ context.info_for_page.logo }}</p>
-                            <p class="footer-contacts__item">Красноярск, ул. Кольцевая, 5</p>
+                            <p class="footer-contacts__item">Красноярск, ул. Богдана Хмельницкого, 10а</p>
                             <a class="footer-contacts__item footer-item__bolder" href="tel:+79080134860">
                                 +7 (908) 013 48-60
                             </a>
@@ -222,13 +223,13 @@
                             <p class="footer__title">Ссылки</p>
                             <div class="footer-links__block">
                                 <div class="footer-links__column">
-                                    <a href="#popular-mirrors" class="footer-links__item">Популярные зеркала</a>
-                                    <a href="#often-questions" class="footer-links__item">Частые вопросы</a>
-                                    <a href="#contact-us" class="footer-links__item">Связь с нами</a>
+                                    <a href="{% url 'main_page' %}#popular-mirrors" class="footer-links__item">Популярные зеркала</a>
+                                    <a href="{% url 'main_page' %}#often-questions" class="footer-links__item">Частые вопросы</a>
+                                    <a href="{% url 'main_page' %}#contact-us" class="footer-links__item">Связь с нами</a>
                                 </div>
                                 <div class="footer-links__column">
-                                    <a href="#projects" class="footer-links__item">Проекты</a>
-                                    <a href="#parallax__fixed" class="footer-links__item">Процесс разработки</a>
+                                    <a href="{% url 'main_page' %}#projects" class="footer-links__item">Проекты</a>
+                                    <a href="{% url 'main_page' %}#parallax__fixed" class="footer-links__item">Процесс разработки</a>
                                     <a href="{% url 'goods' %}" class="footer-links__item">Каталог</a>
                                 </div>
                             </div>

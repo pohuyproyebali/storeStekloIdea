@@ -9,6 +9,6 @@ urlpatterns = [
         path('', basket_list, name='list'),
         path('<int:product_id>/add/', add_to_basket, name='add'),
         path('<int:product_id>/add/<int:size_id>/', add_to_basket, name='add_with_size'),
-        path('<int:product_id>/remove/', remove_from_basket, name='remove'),
+        path('<int:product_id>/remove/<int:id_of_many>/', remove_from_basket, name='remove'),
     ])),
 ]

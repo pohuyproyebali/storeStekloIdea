@@ -33,11 +33,16 @@ def goods(request, sort_pk=None):
                 f'product {product}': {
                     'name': Product.objects.get(id=product['id']).name,
                     'product': Product.objects.get(id=product['id']),
+                    'id_of_many': product['id_of_many'],
                     'image': ImageToProduct.objects.get(product=product['id'], firstPhoto=True).image,
                     'cost': math.ceil(
                         float(
                             Product.product_manager.cost(
                                 product=Product.objects.get(id=product['id']),
+                                size=Product.product_manager.all_size(
+                                    product=Product.objects.get(
+                                        id=product['id']
+                                    ))[product['size']] if isinstance(product['size'], int) else None
                             )
                         )
                     )
@@ -77,6 +82,7 @@ def mirror_page(request, slug_id, size_id=None):
                 f'product {product}': {
                     'name': Product.objects.get(id=product['id']).name,
                     'product': Product.objects.get(id=product['id']),
+                    'id_of_many': product['id_of_many'],
                     'image': ImageToProduct.objects.get(product=product['id'], firstPhoto=True).image,
                     'cost': math.ceil(
                         float(
@@ -85,7 +91,7 @@ def mirror_page(request, slug_id, size_id=None):
                                 size=Product.product_manager.all_size(
                                     product=Product.objects.get(
                                         id=product['id']
-                                    ))[product['size']] if product['size'] is int else None
+                                    ))[product['size']] if isinstance(product['size'], int) else None
                             )
                         )
                     )

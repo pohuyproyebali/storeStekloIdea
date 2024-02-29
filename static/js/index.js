@@ -1,9 +1,8 @@
 $(function ($) {
     var windowWidth = $(window).width();
-    var windowHeight = $(window).height();
 
     $(window).resize(function () {
-        if (windowWidth != $(window).width() || windowHeight != $(window).height()) {
+        if (windowWidth != $(window).width()) {
             location.reload();
             return;
         }
@@ -330,7 +329,7 @@ window.onload = function () {
                     $scrollUp = $nav.offset().top;
                     $muchLeft = ($scrollTotalWidth - $window.width()) / $muchElements;
                     $parallaxFixed = $('.parallax__fixed');
-                    $parallaxFixed.css('padding-bottom', $scrollTotalWidth - 917 + 'px')
+                    $parallaxFixed.css('padding-bottom', $scrollTotalWidth - ($window.width() - 1000) + 'px')
                     // делаем отступ для родителя блока скролла
 
                     if (scrollDirection == 1 && $window.scrollTop() + $nav.height() + 200 < $scrollUp + 200 + $nav.height()) {
@@ -367,7 +366,7 @@ window.onload = function () {
                             $nav.removeClass('fixed');
                         }
 
-                        $muchScrollBottom = $scrollTotalWidth - 917 - 1000
+                        $muchScrollBottom = $scrollTotalWidth - ($window.width() - 1000) - 1000
                         if (scrollMuch > $muchLeft * $muchElements && scrollDirection == 0) {
                             $nav.removeClass('fixed');
                             $nav.css({

@@ -160,8 +160,6 @@
                 <form action="" method="post">
                     {% csrf_token %}
                     <div class="form__item">
-                        <!--<label for="{{ form.name.id_for_label }}"></label>-->
-                        <!--<input placeholder="Имя" type="text" class="form__input" name="name">-->
                         {{ context.form.name }}
                     </div>
                     <div class="form__item">
