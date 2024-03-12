@@ -56,6 +56,7 @@ def goods(request, sort_pk=None):
 
 
 def mirror_page(request, slug_id, size_id=None):
+    form = order_form_create(request)
     mirror = get_object_or_404(Product, slug=slug_id)
     context = {
         'mirror': {
@@ -99,7 +100,8 @@ def mirror_page(request, slug_id, size_id=None):
                 for product in request.session.get('basket')
             } if request.session.get('basket') else {},
         'info_for_page': info_for_page,
-        'for_header': False
+        'for_header': False,
+        'form': form
     }
 
     return render(request, 'products/product_page.html', {'context': context})

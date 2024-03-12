@@ -1,7 +1,7 @@
 from django import forms
 from django.shortcuts import redirect
 
-from products.models import Product
+from products.models import Product, SizeToProduct
 from .models import Order, ProductToOrders
 
 
@@ -41,12 +41,16 @@ def order_form_create(request, main_page=False):
             if request.session.get('basket', None):
                 for product in request.session['basket']:
                     ProductToOrders.objects.create(
-                        order=just_created_order, product=Product.objects.get(id=product['id'])
+                        order=just_created_order,
+                        product=Product.objects.get(id=product['id']),
+                        size=Product.product_manager.all_size(product=product['id'])[
+                            product['size'] if product['size'] is not None else 0
+                        ]
                     )
                 del request.session['basket']
                 request.session.modified = True
-            return form, redirect('/')
+            return form, redirect(request.path)
     else:
         form = OrderForm()
         form.update_style(main_page)
-        return form
+    return form
